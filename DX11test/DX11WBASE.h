@@ -23,4 +23,3 @@ public:
 	HRESULT initDevice();
 	void CleanupDevice();
 };
-

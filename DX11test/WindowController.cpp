@@ -1,9 +1,12 @@
 #include "WindowController.h"
 
 
-WindowController::WindowController(HINSTANCE instance)
+WindowController::WindowController(HINSTANCE instance):m_dstFps(60.0f),isFPSLocked(true),m_LastTime(0)
 {
 	m_hInst=instance;
+	
+	QueryPerformanceFrequency(&PT_litmp);
+	mCPUFreq =(double)PT_litmp.QuadPart;
 }
 
 
@@ -69,7 +72,32 @@ int WindowController::run()
         }
 		else
 		{
+			QueryPerformanceCounter(&PT_litmp);   
+			double tick = PT_litmp.QuadPart;                 //获得起始的值
+			if(!m_LastTime)
+			{
+				m_LastTime=tick;
+			}
+			double deltatick=tick-m_LastTime;
+			float deltatime = deltatick / mCPUFreq;
+
+			m_fps = 1 / deltatime;
+
 			this->render();
+			
+			m_LastTime=tick;
+			if(isFPSLocked)
+			{
+				double lockTick;
+				while(deltatime < 1  /m_dstFps){
+					QueryPerformanceCounter(&PT_litmp);   
+					lockTick = PT_litmp.QuadPart;                 //获得起始的值   
+
+					deltatick=lockTick-m_LastTime;
+					deltatime = deltatick / mCPUFreq;
+
+				}
+			}
 		}
 
     }
