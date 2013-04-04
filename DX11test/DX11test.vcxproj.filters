@@ -23,9 +23,21 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="WindowController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11WBASE.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial00.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11WBASE.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

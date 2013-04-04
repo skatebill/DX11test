@@ -69,10 +69,14 @@
     <None Include="Tutorial00.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DX11WBASE.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="WindowController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DX11WBASE.cpp" />
     <ClCompile Include="Tutorial00.cpp" />
+    <ClCompile Include="WindowController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
