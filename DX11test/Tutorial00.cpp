@@ -17,6 +17,7 @@ public:
 		float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; //red,green,blue,alpha
 		m_pImmediateContext->ClearRenderTargetView( m_pRenderTargetView, ClearColor );
 		m_pSwapChain->Present( 0, 0 );
+
 	}
 };
 
@@ -24,7 +25,7 @@ public:
 int WINAPI wWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow )
 {
 	myRender t(hInstance);
-	t.createWindow(L"testwindow",1920,1080);
+	t.createWindow(L"testwindow",800,600);
 	t.run();
 
 

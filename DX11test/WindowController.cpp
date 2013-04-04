@@ -18,6 +18,10 @@ HRESULT WindowController::createWindow(LPCWSTR title,int w,int h,bool fullscreen
 	{
 		return E_FAIL;
 	}
+
+	m_Width=w;
+	m_Height=w;
+
     // Register class
     WNDCLASSEX wcex;
     wcex.cbSize = sizeof( WNDCLASSEX );
@@ -34,23 +38,22 @@ HRESULT WindowController::createWindow(LPCWSTR title,int w,int h,bool fullscreen
     wcex.hIconSm = LoadIcon( wcex.hInstance, ( LPCTSTR )107 );
     if( !RegisterClassEx( &wcex ) )
         return E_FAIL;
-	
-    RECT rc = { 0, 0, w, h };
-    AdjustWindowRect( &rc, WS_OVERLAPPEDWINDOW, FALSE );
-    m_hWnd = CreateWindow( L"MyWindowClass", title, WS_OVERLAPPEDWINDOW,
-                           CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, m_hInst,
-                           NULL );
-    if( !m_hWnd )
-        return E_FAIL;
-
-    ShowWindow( m_hWnd, SW_SHOW );
+	DWORD styles = WS_OVERLAPPEDWINDOW & ~(WS_SIZEBOX |WS_MAXIMIZEBOX|WS_MINIMIZEBOX) ;
+    RECT rc = { 0, 0, m_Width, m_Height };
+    AdjustWindowRect( &rc, styles , FALSE);
 
 	int screenW=GetSystemMetrics(SM_CXSCREEN);
 	int screenH=GetSystemMetrics(SM_CYSCREEN);
 	int newposx= (screenW>>1)-((rc.right - rc.left)>>1);
 	int newposy= (screenH>>1)-((rc.bottom - rc.top)>>1);
-	SetWindowPos(m_hWnd,HWND_TOP,newposx,newposy,0,0,SWP_SHOWWINDOW | SWP_NOSIZE);
 
+    m_hWnd = CreateWindow( L"MyWindowClass", title, styles,
+                           newposx, newposy, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, m_hInst,
+                           NULL );
+    if( !m_hWnd )
+        return E_FAIL;
+
+    ShowWindow( m_hWnd, SW_SHOW );
     return S_OK;
 }
 int WindowController::run()
