@@ -14,9 +14,19 @@ public:
 	virtual ~myRender(){}
 	void render()
 	{
-		float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; //red,green,blue,alpha
+		float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 0.0f }; //red,green,blue,alpha
 		m_pImmediateContext->ClearRenderTargetView( m_pRenderTargetView, ClearColor );
+
+
+
+
 		m_pSwapChain->Present( 0, 0 );
+
+	}
+	void intiData(){
+	
+	}
+	void cleanup(){
 
 	}
 };

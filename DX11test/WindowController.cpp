@@ -61,7 +61,8 @@ HRESULT WindowController::createWindow(LPCWSTR title,int w,int h,bool fullscreen
 }
 int WindowController::run()
 {
-	
+	intiData();
+
     MSG msg = {0};
     while( WM_QUIT != msg.message )
     {
@@ -101,6 +102,7 @@ int WindowController::run()
 		}
 
     }
+	cleanup();
 	return msg.wParam;
 }
 //--------------------------------------------------------------------------------------
@@ -113,17 +115,25 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam 
 
     switch( message )
     {
-        case WM_PAINT:
-            hdc = BeginPaint( hWnd, &ps );
-            EndPaint( hWnd, &ps );
-            break;
+	case WM_KEYDOWN:
+		break;
+	case WM_KEYUP:
+		if(wParam == VK_ESCAPE)
+		{
+			PostQuitMessage(0);
+		}
+		break;
+	case WM_PAINT:
+		hdc = BeginPaint( hWnd, &ps );
+		EndPaint( hWnd, &ps );
+		break;
 
-        case WM_DESTROY:
-            PostQuitMessage( 0 );
-            break;
+	case WM_DESTROY:
+		PostQuitMessage( 0 );
+		break;
 
-        default:
-            return DefWindowProc( hWnd, message, wParam, lParam );
+	default:
+		return DefWindowProc( hWnd, message, wParam, lParam );
     }
 
     return 0;

@@ -38,6 +38,8 @@ public:
 	HWND getHwnd(){return m_hWnd;}
 	int run();
 	virtual void render()=0;
+	virtual void intiData()=0;
+	virtual void cleanup()=0;
 	
 	int getWindowWidth(){return m_Width;}
 	int getWindowHeight(){return m_Height;}
