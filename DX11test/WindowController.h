@@ -1,8 +1,10 @@
 #pragma once
 
 #include <windows.h>
+#include <list>
+using namespace std;
 
-LRESULT CALLBACK    WndProc( HWND, UINT, WPARAM, LPARAM );
+LRESULT CALLBACK    MainWndProc( HWND, UINT, WPARAM, LPARAM );
 /****************************************************************************
 *	made by 肖驰
 *	基础的窗口管理类
@@ -25,6 +27,8 @@ private:
 	bool isFPSLocked;
 	LARGE_INTEGER   PT_litmp;
 	double m_LastTime;
+
+	static list<WindowController*> *s_windowList;
 protected:
 	HINSTANCE               m_hInst;
 	HWND                    m_hWnd;
@@ -37,7 +41,7 @@ public:
 	HINSTANCE getInstance(){return m_hInst;}
 	HWND getHwnd(){return m_hWnd;}
 	int run();
-	virtual void render()=0;
+	virtual void render(float delta)=0;
 	virtual void intiData()=0;
 	virtual void cleanup()=0;
 	
@@ -58,4 +62,11 @@ public:
 	void setFPS(float dstFPS){m_dstFps=dstFPS;}
 	void lockFPS(){isFPSLocked=true;}
 	void unlockFPS(){isFPSLocked=false;}
+	LRESULT CALLBACK    WndProc( HWND, UINT, WPARAM, LPARAM );
+
+	static list<WindowController*>* getAllWindow(){
+		int i=s_windowList->size();
+		if(i<1) return 0;
+		return s_windowList;}
+	
 };

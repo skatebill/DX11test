@@ -12,7 +12,7 @@ class myRender:public DX11WBASE
 public:
 	myRender(HINSTANCE hInstance):DX11WBASE(hInstance){};
 	virtual ~myRender(){}
-	void render()
+	void render(float delta)
 	{
 		float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 0.0f }; //red,green,blue,alpha
 		m_pImmediateContext->ClearRenderTargetView( m_pRenderTargetView, ClearColor );
@@ -37,8 +37,5 @@ int WINAPI wWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 	myRender t(hInstance);
 	t.createWindow(L"testwindow",800,600);
 	t.run();
-
-
-
     return 0;
 }

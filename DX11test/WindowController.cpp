@@ -9,6 +9,8 @@ WindowController::WindowController(HINSTANCE instance):m_dstFps(60.0f),isFPSLock
 	mCPUFreq =(double)PT_litmp.QuadPart;
 }
 
+list<WindowController*>* WindowController::s_windowList = new list<WindowController*>();
+
 
 WindowController::~WindowController(void)
 {
@@ -29,7 +31,7 @@ HRESULT WindowController::createWindow(LPCWSTR title,int w,int h,bool fullscreen
     WNDCLASSEX wcex;
     wcex.cbSize = sizeof( WNDCLASSEX );
     wcex.style = CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc = WndProc;
+	wcex.lpfnWndProc = MainWndProc;
     wcex.cbClsExtra = 0;
     wcex.cbWndExtra = 0;
     wcex.hInstance = m_hInst;
@@ -57,6 +59,7 @@ HRESULT WindowController::createWindow(LPCWSTR title,int w,int h,bool fullscreen
         return E_FAIL;
 
     ShowWindow( m_hWnd, SW_SHOW );
+	s_windowList->push_back(this);
     return S_OK;
 }
 int WindowController::run()
@@ -84,7 +87,7 @@ int WindowController::run()
 
 			m_fps = 1 / deltatime;
 
-			this->render();
+			this->render(deltatime);
 			
 			m_LastTime=tick;
 			if(isFPSLocked)
@@ -108,7 +111,7 @@ int WindowController::run()
 //--------------------------------------------------------------------------------------
 // Called every time the application receives a message
 //--------------------------------------------------------------------------------------
-LRESULT CALLBACK WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
+LRESULT CALLBACK WindowController::WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 {
     PAINTSTRUCT ps;
     HDC hdc;
@@ -137,4 +140,23 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam 
     }
 
     return 0;
+}
+
+
+LRESULT CALLBACK    MainWndProc(  HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
+	
+	list<WindowController*>* window=WindowController::getAllWindow();
+	if(window)
+	{
+		list<WindowController*>::iterator iter=window->begin();
+		do{
+			if(*iter != 0 &&(*iter)->getHwnd() == hWnd)
+			{
+				return (*iter)->WndProc(hWnd,message,wParam,lParam);
+			}
+			iter++;
+		}while(iter++ != WindowController::getAllWindow()->end());
+	}
+
+    return DefWindowProc( hWnd, message, wParam, lParam );
 }
