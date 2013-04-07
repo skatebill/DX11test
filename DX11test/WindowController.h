@@ -2,6 +2,7 @@
 
 #include <windows.h>
 #include <list>
+#include <map>
 using namespace std;
 
 LRESULT CALLBACK    MainWndProc( HWND, UINT, WPARAM, LPARAM );
@@ -62,8 +63,12 @@ public:
 	void setFPS(float dstFPS){m_dstFps=dstFPS;}
 	void lockFPS(){isFPSLocked=true;}
 	void unlockFPS(){isFPSLocked=false;}
-	LRESULT CALLBACK    WndProc( HWND, UINT, WPARAM, LPARAM );
-
+	virtual LRESULT CALLBACK    WndProc( HWND, UINT, WPARAM, LPARAM );
+	virtual void keyDown(int);
+	virtual void keyUp(int);
+	virtual void MouseDown(int);
+	virtual void MouseUp(int);
+	virtual void MouseMove(int);
 	static list<WindowController*>* getAllWindow(){
 		int i=s_windowList->size();
 		if(i<1) return 0;

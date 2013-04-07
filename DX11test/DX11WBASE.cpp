@@ -39,9 +39,7 @@ HRESULT DX11WBASE::createWindow(LPCWSTR title,int w,int h,bool fullscreen)
 
     D3D_DRIVER_TYPE driverTypes[] =
     {
-        D3D_DRIVER_TYPE_HARDWARE,
-        D3D_DRIVER_TYPE_WARP,
-        D3D_DRIVER_TYPE_REFERENCE,
+        D3D_DRIVER_TYPE_HARDWARE
     };
     UINT numDriverTypes = ARRAYSIZE( driverTypes );
 
@@ -63,7 +61,7 @@ HRESULT DX11WBASE::createWindow(LPCWSTR title,int w,int h,bool fullscreen)
     sd.OutputWindow = m_hWnd;
     sd.SampleDesc.Count = 1;
     sd.SampleDesc.Quality = 0;
-    sd.Windowed = TRUE;
+    sd.Windowed = fullscreen? FALSE:TRUE;
 
     for( UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++ )
     {

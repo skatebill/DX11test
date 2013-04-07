@@ -25,7 +25,7 @@ HRESULT WindowController::createWindow(LPCWSTR title,int w,int h,bool fullscreen
 	}
 
 	m_Width=w;
-	m_Height=w;
+	m_Height=h;
 
     // Register class
     WNDCLASSEX wcex;
@@ -119,12 +119,10 @@ LRESULT CALLBACK WindowController::WndProc( HWND hWnd, UINT message, WPARAM wPar
     switch( message )
     {
 	case WM_KEYDOWN:
+		keyDown(wParam);
 		break;
 	case WM_KEYUP:
-		if(wParam == VK_ESCAPE)
-		{
-			PostQuitMessage(0);
-		}
+		keyUp(wParam);
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint( hWnd, &ps );
@@ -141,6 +139,29 @@ LRESULT CALLBACK WindowController::WndProc( HWND hWnd, UINT message, WPARAM wPar
 
     return 0;
 }
+
+
+void WindowController::keyDown(int){
+
+}
+void WindowController::keyUp(int keyCode){
+	if(keyCode == VK_ESCAPE)
+	{
+		PostQuitMessage(0);
+	}
+
+}
+void WindowController::MouseDown(int){
+
+}
+void WindowController::MouseUp(int){
+
+}
+void WindowController::MouseMove(int){
+
+}
+
+
 
 
 LRESULT CALLBACK    MainWndProc(  HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="myShaderProgram">
+      <UniqueIdentifier>{3be36d8e-246d-4463-ab38-36b1008d89c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Tutorial00.jpg">
@@ -29,6 +32,9 @@
     <ClInclude Include="DX11WBASE.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MyShaderPrograme.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial00.cpp">
@@ -38,6 +44,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DX11WBASE.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyShaderPrograme.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
