@@ -22,7 +22,7 @@ public:
 
 	bool loadShader(WCHAR* fileName);
 	ID3D11VertexShader*	getVertexShader(){return m_pVertexShader;}
-		ID3D11PixelShader* getPixelShade(){return m_pPixelShader;}
-		ID3D11InputLayout* getVertexLayout(){return m_pVertexLayout;}
+	ID3D11PixelShader* getPixelShade(){return m_pPixelShader;}
+	ID3D11InputLayout* getVertexLayout(){return m_pVertexLayout;}
 };
 

@@ -32,7 +32,7 @@
     <ClInclude Include="DX11WBASE.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="MyShaderPrograme.h">
+    <ClInclude Include="ShaderProgram.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -46,7 +46,7 @@
     <ClCompile Include="DX11WBASE.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="MyShaderPrograme.cpp">
+    <ClCompile Include="ShaderProgram.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

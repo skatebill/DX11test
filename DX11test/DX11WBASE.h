@@ -20,6 +20,12 @@ public:
 	virtual ~DX11WBASE(void);
 	
 	HRESULT createWindow(LPCWSTR title,int w=800,int h=600,bool fullscreen=false);
+
 	HRESULT initDevice();
 	void CleanupDevice();
+
+	
+	virtual void render(float delta)=0;
+	virtual void intiData()=0;
+	virtual void cleanup()=0;
 };

@@ -42,10 +42,17 @@ public:
 	HINSTANCE getInstance(){return m_hInst;}
 	HWND getHwnd(){return m_hWnd;}
 	int run();
+
 	virtual void render(float delta)=0;
 	virtual void intiData()=0;
 	virtual void cleanup()=0;
 	
+	virtual void keyDown(int);
+	virtual void keyUp(int);
+	virtual void MouseDown(int);
+	virtual void MouseUp(int);
+	virtual void MouseMove(int);
+
 	int getWindowWidth(){return m_Width;}
 	int getWindowHeight(){return m_Height;}
 	void moveWindow(int x,int y){
@@ -64,11 +71,6 @@ public:
 	void lockFPS(){isFPSLocked=true;}
 	void unlockFPS(){isFPSLocked=false;}
 	virtual LRESULT CALLBACK    WndProc( HWND, UINT, WPARAM, LPARAM );
-	virtual void keyDown(int);
-	virtual void keyUp(int);
-	virtual void MouseDown(int);
-	virtual void MouseUp(int);
-	virtual void MouseMove(int);
 	static list<WindowController*>* getAllWindow(){
 		int i=s_windowList->size();
 		if(i<1) return 0;
