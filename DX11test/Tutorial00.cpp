@@ -17,6 +17,8 @@
 #include"DX11WBASE.h"
 #include "ShaderProgram.h"
 #include <xnamath.h>
+#include "Texture2D.h"
+#include "Sampler.h"
 struct SimpleVertex
 {
     XMFLOAT3 Pos;
@@ -31,7 +33,8 @@ struct ConstantBuffer
 	XMMATRIX mView;
 	XMMATRIX mProjection;
 };
-
+Texture2D* tex;
+Sampler* samp;
 class test:public DX11WBASE{
 private:
 	ShaderProgram *m_shader;
@@ -68,6 +71,7 @@ public:
 		cb.mProjection = XMMatrixTranspose( m_Projection );
 		m_pImmediateContext->UpdateSubresource( m_pConstantBuffer, 0, NULL, &cb, 0, 0 );
 
+
 		//
 		// Renders a triangle
 		//
@@ -101,13 +105,13 @@ public:
 		SimpleVertex vertices[] =
 		{
 			{ XMFLOAT3( -1.0f, 1.0f, -1.0f ), XMFLOAT4( 0.0f, 0.0f, 1.0f, 1.0f ) ,XMFLOAT2(0,0)},
-			{ XMFLOAT3( 1.0f, 1.0f, -1.0f ), XMFLOAT4( 0.0f, 1.0f, 0.0f, 1.0f ) ,XMFLOAT2(0,1) },
-			{ XMFLOAT3( 1.0f, 1.0f, 1.0f ), XMFLOAT4( 0.0f, 1.0f, 1.0f, 1.0f ) ,XMFLOAT2(1,0) },
-			{ XMFLOAT3( -1.0f, 1.0f, 1.0f ), XMFLOAT4( 1.0f, 0.0f, 0.0f, 1.0f ) ,XMFLOAT2(1,1) },
-			{ XMFLOAT3( -1.0f, -1.0f, -1.0f ), XMFLOAT4( 1.0f, 0.0f, 1.0f, 1.0f ) ,XMFLOAT2(1,0) },
-			{ XMFLOAT3( 1.0f, -1.0f, -1.0f ), XMFLOAT4( 1.0f, 1.0f, 0.0f, 1.0f ) ,XMFLOAT2(0,1) },
+			{ XMFLOAT3( 1.0f, 1.0f, -1.0f ), XMFLOAT4( 0.0f, 1.0f, 0.0f, 1.0f ) ,XMFLOAT2(0,2) },
+			{ XMFLOAT3( 1.0f, 1.0f, 1.0f ), XMFLOAT4( 0.0f, 1.0f, 1.0f, 1.0f ) ,XMFLOAT2(2,0) },
+			{ XMFLOAT3( -1.0f, 1.0f, 1.0f ), XMFLOAT4( 1.0f, 0.0f, 0.0f, 1.0f ) ,XMFLOAT2(2,2) },
+			{ XMFLOAT3( -1.0f, -1.0f, -1.0f ), XMFLOAT4( 1.0f, 0.0f, 1.0f, 1.0f ) ,XMFLOAT2(2,0) },
+			{ XMFLOAT3( 1.0f, -1.0f, -1.0f ), XMFLOAT4( 1.0f, 1.0f, 0.0f, 1.0f ) ,XMFLOAT2(0,2) },
 			{ XMFLOAT3( 1.0f, -1.0f, 1.0f ), XMFLOAT4( 1.0f, 1.0f, 1.0f, 1.0f ) ,XMFLOAT2(0,0) },
-			{ XMFLOAT3( -1.0f, -1.0f, 1.0f ), XMFLOAT4( 0.0f, 0.0f, 0.0f, 1.0f ) ,XMFLOAT2(0,1) },
+			{ XMFLOAT3( -1.0f, -1.0f, 1.0f ), XMFLOAT4( 0.0f, 0.0f, 0.0f, 1.0f ) ,XMFLOAT2(0,2) },
 		};
 		D3D11_BUFFER_DESC bd;
 		ZeroMemory( &bd, sizeof(bd) );
@@ -204,8 +208,14 @@ public:
 		if( FAILED( hr ) )
 			exit(0);
 
-		m_pImmediateContext->PSSetShaderResources( 0, 1, &m_pTextureRV );
-		m_pImmediateContext->PSSetSamplers( 0, 1, &m_pSamplerLinear );
+	//	m_pImmediateContext->PSSetShaderResources( 0, 1, &m_pTextureRV );
+	//	m_pImmediateContext->PSSetSamplers( 0, 1, &m_pSamplerLinear );
+		tex=new Texture2D(m_pd3dDevice);
+		tex->loadFromFile(L"seafloor.dds");
+		tex->useTextureAt(m_pImmediateContext,0);
+		samp=new Sampler(m_pd3dDevice);
+		samp->createSampleState(D3D11_FILTER_MIN_MAG_MIP_LINEAR,D3D11_TEXTURE_ADDRESS_CLAMP);
+		samp->useSamplerAt(m_pImmediateContext,0);
 		if( FAILED( hr ) )
 			exit(0);
 

@@ -16,6 +16,21 @@
     <Filter Include="myShaderProgram">
       <UniqueIdentifier>{3be36d8e-246d-4463-ab38-36b1008d89c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{b072b8f2-5fa2-4842-a56e-57f76c46ca75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\2D">
+      <UniqueIdentifier>{d1a98594-dcba-4cc8-8d1a-bc566708d4a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Resource">
+      <UniqueIdentifier>{769d2424-1995-4607-b480-f0d7e0a10b1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Resource\h">
+      <UniqueIdentifier>{0302755b-5cde-4501-9293-7c03279ab26d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Resource\cpp">
+      <UniqueIdentifier>{1e46870d-c15d-4ae5-84b9-23dff1adad0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Tutorial00.jpg">
@@ -33,7 +48,28 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
-      <Filter>头文件</Filter>
+      <Filter>myShaderProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="MyObject.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="2DBaseObject.h">
+      <Filter>UI\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>UI\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="MyResource.h">
+      <Filter>UI\Resource\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>UI\Resource\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Sampler.h">
+      <Filter>UI\Resource\h</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>UI\Resource\h</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,7 +83,25 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ShaderProgram.cpp">
-      <Filter>源文件</Filter>
+      <Filter>myShaderProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="2DBaseObject.cpp">
+      <Filter>UI\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="View.cpp">
+      <Filter>UI\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="MyResource.cpp">
+      <Filter>UI\Resource\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampler.cpp">
+      <Filter>UI\Resource\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>UI\Resource\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>UI\Resource\cpp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

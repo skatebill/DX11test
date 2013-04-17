@@ -73,15 +73,28 @@
     <None Include="Tutorial00.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="2DBaseObject.h" />
     <ClInclude Include="DX11WBASE.h" />
+    <ClInclude Include="MyObject.h" />
+    <ClInclude Include="MyResource.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Sampler.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="View.h" />
     <ClInclude Include="WindowController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="2DBaseObject.cpp" />
     <ClCompile Include="DX11WBASE.cpp" />
+    <ClCompile Include="MyResource.cpp" />
+    <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
     <ClCompile Include="Tutorial00.cpp" />
+    <ClCompile Include="View.cpp" />
     <ClCompile Include="WindowController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
