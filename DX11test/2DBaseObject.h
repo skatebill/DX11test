@@ -1,7 +1,7 @@
 #include"MyObject.h"
 #include <d3dx11.h>
 #include <xnamath.h>
-#include "Model.h"
+#include "ModelMesh.h"
 
 namespace myprogram{
 	struct ViewProMatrix{		

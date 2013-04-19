@@ -45,7 +45,7 @@ HRESULT DX11WBASE::createWindow(LPCWSTR title,int w,int h,bool fullscreen)
 
     D3D_FEATURE_LEVEL featureLevels[] =
     {
-        D3D_FEATURE_LEVEL_11_0
+        D3D_FEATURE_LEVEL_10_0
     };
 	UINT numFeatureLevels = ARRAYSIZE( featureLevels );
 

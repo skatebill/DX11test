@@ -7,7 +7,7 @@ class View :
 {
 private:
 	ID3D11Device* m_Device;
-	Model*	m_QuadModel;
+	ModelMesh*	m_QuadModel;
 public:
 	View(ID3D11Device*);
 	virtual ~View(void);

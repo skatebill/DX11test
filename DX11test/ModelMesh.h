@@ -4,11 +4,12 @@
 #include<D3DX11.h>
 #include<vector>
 #include <xnamath.h>
+#include "Texture2D.h"
 struct VertexPU{
 	XMFLOAT3 pos;
 	XMFLOAT2 tex;
 };
-class Model:public MyResource
+class ModelMesh:public MyResource
 {
 private:
 	ID3D11Buffer* m_VertexBuffer;
@@ -19,15 +20,18 @@ private:
 	int m_NumVertex;
 	UINT m_Stride;
 
+	Texture2D *m_Texture;
+
 public:
-	Model(ID3D11Device*);
-	~Model(void);
+	ModelMesh(ID3D11Device*);
+	~ModelMesh(void);
 
 	void release();
 	bool isReleased();
 
 	bool setVertexSource(void*,int,int);
 	bool setIndexSource(void*,int);
+	bool loadTexture(char*);
 
 	ID3D11Buffer* getVertexBuffer();
 	ID3D11Buffer* getIndexBuffer();
@@ -36,13 +40,25 @@ public:
 		UINT offset=0;
 		context->IASetVertexBuffers( 0, 1, &m_VertexBuffer, &m_Stride, &offset );
 		// Set index buffer
-		context->IASetIndexBuffer( m_IndexBuffer, DXGI_FORMAT_R16_UINT, 0 );};
-
+		context->IASetIndexBuffer( m_IndexBuffer, DXGI_FORMAT_R16_UINT, 0 );}
+	
+	void useModel(ID3D11DeviceContext* context,int slot){
+		UINT offset=0;
+		context->IASetVertexBuffers( 0, 1, &m_VertexBuffer, &m_Stride, &offset );
+		// Set index buffer
+		context->IASetIndexBuffer( m_IndexBuffer, DXGI_FORMAT_R16_UINT, 0 );
+		useTextureAt(context,slot);
+	}
 	int getIndexNum(){
 		return m_IndexNum;
+	}
+	void useTextureAt(ID3D11DeviceContext* context,int slot){
+		if(m_Texture){
+			m_Texture->useTextureAt(context,slot);
+		}
 	}
 };
 
 
 
-Model* getQuadModel(ID3D11Device* ,int w,int h);
+ModelMesh* getQuadModel(ID3D11Device* ,int w,int h);

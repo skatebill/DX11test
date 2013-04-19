@@ -17,6 +17,16 @@ bool Texture2D::loadFromFile(LPWCH filename){
          &m_RecourceView,NULL);
 	return !FAILED(hr);
 }
+
+bool Texture2D::loadFromFile(char* filename){
+	int num=MultiByteToWideChar(CP_ACP,0,filename,-1,NULL,0);
+	LPWCH wfilename=new WCHAR[num];
+	MultiByteToWideChar(CP_ACP,0,filename,-1,wfilename,num);
+	HRESULT hr = D3DX11CreateShaderResourceViewFromFile( m_pd3dDevice,wfilename, NULL, NULL, 
+         &m_RecourceView,NULL);
+	delete wfilename;
+	return !FAILED(hr);
+}
 ID3D11ShaderResourceView* Texture2D::getTexture(){
 	return m_RecourceView;
 }

@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include<d3d11.h>
 #include <d3dx11.h>
+#include<Windows.h>
 class Texture2D :
 	public Texture
 {
@@ -13,6 +14,7 @@ public:
 	~Texture2D(void);
 
 	bool loadFromFile(LPWCH);
+	bool loadFromFile(char*);
 	ID3D11ShaderResourceView* getTexture();
 	void release();
 	bool isReleased();

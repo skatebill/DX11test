@@ -31,6 +31,9 @@
     <Filter Include="UI\Resource\cpp">
       <UniqueIdentifier>{1e46870d-c15d-4ae5-84b9-23dff1adad0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="pharser">
+      <UniqueIdentifier>{0aba44e4-5dad-458f-9eb0-5e00f5950bd2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Tutorial00.jpg">
@@ -71,7 +74,13 @@
     <ClInclude Include="Texture.h">
       <Filter>UI\Resource\h</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
+    <ClInclude Include="phrase\FileProcessor.h">
+      <Filter>pharser</Filter>
+    </ClInclude>
+    <ClInclude Include="phrase\Chunk.h">
+      <Filter>pharser</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelMesh.h">
       <Filter>UI\Resource\h</Filter>
     </ClInclude>
   </ItemGroup>
@@ -106,7 +115,13 @@
     <ClCompile Include="Texture2D.cpp">
       <Filter>UI\Resource\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
+    <ClCompile Include="phrase\chunkprocessor.cpp">
+      <Filter>pharser</Filter>
+    </ClCompile>
+    <ClCompile Include="phrase\FileProcessor.cpp">
+      <Filter>pharser</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelMesh.cpp">
       <Filter>UI\Resource\cpp</Filter>
     </ClCompile>
   </ItemGroup>

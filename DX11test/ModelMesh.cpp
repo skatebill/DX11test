@@ -1,28 +1,28 @@
-#include "Model.h"
+#include "ModelMesh.h"
 
 
-Model::Model(ID3D11Device* device):MyResource(),m_VertexBuffer(0),m_IndexBuffer(0),m_IndexNum(0)
+ModelMesh::ModelMesh(ID3D11Device* device):MyResource(),m_VertexBuffer(0),m_IndexBuffer(0),m_IndexNum(0),m_Texture(0)
 {
 	m_Device=device;
 }
 
 
-Model::~Model(void)
+ModelMesh::~ModelMesh(void)
 {
 	release();
 }
 
-void Model::release()
+void ModelMesh::release()
 {
 	RELEASE(m_VertexBuffer);
 	RELEASE(m_IndexBuffer);
 }
-bool Model::isReleased()
+bool ModelMesh::isReleased()
 {
 	return m_VertexBuffer == 0;
 }
 
-bool Model::setVertexSource(void* data,int datasize,int numvertex)
+bool ModelMesh::setVertexSource(void* data,int datasize,int numvertex)
 {	
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory( &bd, sizeof(bd) );
@@ -41,7 +41,7 @@ bool Model::setVertexSource(void* data,int datasize,int numvertex)
 
 	return true;
 }
-bool Model::setIndexSource(void* data,int indexNum)
+bool ModelMesh::setIndexSource(void* data,int indexNum)
 {
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory( &bd, sizeof(bd) );
@@ -59,17 +59,26 @@ bool Model::setIndexSource(void* data,int indexNum)
 
 	return true;
 }
+bool ModelMesh::loadTexture(char* texName){
+	if(m_Texture)
+	{
+		m_Texture->release();
+	}
+	m_Texture=new Texture2D(m_Device);
+	
+	return m_Texture->loadFromFile(texName);
+}
 
 
 
-Model* getQuadModel(ID3D11Device* device,int w,int h){
+ModelMesh* getQuadModel(ID3D11Device* device,int w,int h){
 	VertexPU vertex[]={
 		{XMFLOAT3(0,0,0),XMFLOAT2(0,1)},
 		{XMFLOAT3(w,0,0),XMFLOAT2(1,1)},
 		{XMFLOAT3(w,-h,0),XMFLOAT2(1,0)},
 		{XMFLOAT3(0,-h,0),XMFLOAT2(0,0)}};
 	WORD	index[]={0,1,3,1,2,3};
-	Model* result=new Model(device);
+	ModelMesh* result=new ModelMesh(device);
 	result->setVertexSource(vertex,sizeof(VertexPU),4);
 	result->setIndexSource(index,6);
 	return result;
