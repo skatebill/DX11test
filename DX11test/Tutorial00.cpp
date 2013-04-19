@@ -19,6 +19,8 @@
 #include <xnamath.h>
 #include "Texture2D.h"
 #include "Sampler.h"
+#include "Model.h"
+#include "View.h"
 struct SimpleVertex
 {
     XMFLOAT3 Pos;
@@ -35,6 +37,8 @@ struct ConstantBuffer
 };
 Texture2D* tex;
 Sampler* samp;
+Model* model;
+View* view;
 class test:public DX11WBASE{
 private:
 	ShaderProgram *m_shader;
@@ -59,7 +63,7 @@ public:
 		//
 		// Animate the cube
 		//
-		m_World = XMMatrixRotationY( t );
+	//	m_World = XMMatrixRotationY( t );
 
 
 		//
@@ -67,20 +71,20 @@ public:
 		//
 		ConstantBuffer cb;
 		cb.mWorld = XMMatrixTranspose( m_World );
-		cb.mView = XMMatrixTranspose( m_View );
-		cb.mProjection = XMMatrixTranspose( m_Projection );
-		m_pImmediateContext->UpdateSubresource( m_pConstantBuffer, 0, NULL, &cb, 0, 0 );
-
+		cb.mView = XMMatrixTranspose( view->s_Matrix.view );
+		cb.mProjection = XMMatrixTranspose( view->s_Matrix.projection );
+		//m_pImmediateContext->UpdateSubresource( m_pConstantBuffer, 0, NULL, &cb, 0, 0 );
+		m_shader->setConstantBuffer(m_pImmediateContext,0,&cb);
 
 		//
 		// Renders a triangle
 		//
 		m_pImmediateContext->VSSetShader( m_shader->getVertexShader(), NULL, 0 );
-		m_pImmediateContext->VSSetConstantBuffers( 0, 1, &m_pConstantBuffer );
+		//m_pImmediateContext->VSSetConstantBuffers( 0, 1, &m_pConstantBuffer );
 		m_pImmediateContext->PSSetShader( m_shader->getPixelShader(), NULL, 0 );
-		m_pImmediateContext->DrawIndexed( 36, 0, 0 );        // 36 vertices needed for 12 triangles in a triangle list
+	//	m_pImmediateContext->DrawIndexed( 6, 0, 0 );        // 36 vertices needed for 12 triangles in a triangle list
 
-
+		view->draw(m_pImmediateContext);
 		m_pSwapChain->Present(0,0);
 	}
 	void intiData(){
@@ -89,11 +93,12 @@ public:
 		D3D11_INPUT_ELEMENT_DESC layout[] =
 		{
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		//	{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		};
 		UINT numElements = ARRAYSIZE( layout );
 		m_shader->setLayout(layout,numElements);
+		m_shader->requestConstantBuffer(192);
 		HRESULT hr=m_shader->loadShader(L"Tutorial04.fx");
 		if(FAILED(hr))
 		{
@@ -126,10 +131,6 @@ public:
 		if( FAILED( hr ) )
 			exit(0);
 
-		// Set vertex buffer
-		UINT stride = sizeof( SimpleVertex );
-		UINT offset = 0;
-		m_pImmediateContext->IASetVertexBuffers( 0, 1, &m_pVertexBuffer, &stride, &offset );
 
 		// Create index buffer
 		WORD indices[] =
@@ -160,9 +161,20 @@ public:
 		hr = m_pd3dDevice->CreateBuffer( &bd, &InitData, &m_pIndexBuffer );
 		if( FAILED( hr ) )
 			exit(0);
+		
 
+		/*model=new Model(m_pd3dDevice);
+		model->setVertexSource(vertices,sizeof(SimpleVertex),8);
+		model->setIndexSource(indices,36);
+		
+		model->useModel(m_pImmediateContext);*/
+		getQuadModel(m_pd3dDevice,1,1)->useModel(m_pImmediateContext);
+		// Set vertex buffer
+		UINT stride = sizeof( SimpleVertex );
+		UINT offset = 0;
+	//	m_pImmediateContext->IASetVertexBuffers( 0, 1, &m_pVertexBuffer, &stride, &offset );
 		// Set index buffer
-		m_pImmediateContext->IASetIndexBuffer( m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0 );
+	//	m_pImmediateContext->IASetIndexBuffer( m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0 );
 
 		// Set primitive topology
 		m_pImmediateContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
@@ -187,39 +199,18 @@ public:
 
 		// Initialize the projection matrix
 		m_Projection = XMMatrixPerspectiveFovLH( XM_PIDIV2, getWindowWidth() / (FLOAT)getWindowHeight(), 0.01f, 100.0f );
-		ID3D11ShaderResourceView* m_pTextureRV;
-		ID3D11SamplerState* m_pSamplerLinear;
-		hr = D3DX11CreateShaderResourceViewFromFile( m_pd3dDevice, L"seafloor.dds", NULL, NULL, 
-         &m_pTextureRV,NULL);
 		
-		if( FAILED( hr ) )
-			exit(0);
-	   // Create the sample state
-		D3D11_SAMPLER_DESC sampDesc;
-		ZeroMemory( &sampDesc, sizeof(sampDesc) );
-		sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-		sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-		sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-		sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-		sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
-		sampDesc.MinLOD = 0;
-		sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
-		hr = m_pd3dDevice->CreateSamplerState( &sampDesc, &m_pSamplerLinear );
-		if( FAILED( hr ) )
-			exit(0);
-
-	//	m_pImmediateContext->PSSetShaderResources( 0, 1, &m_pTextureRV );
-	//	m_pImmediateContext->PSSetSamplers( 0, 1, &m_pSamplerLinear );
 		tex=new Texture2D(m_pd3dDevice);
 		tex->loadFromFile(L"seafloor.dds");
 		tex->useTextureAt(m_pImmediateContext,0);
 		samp=new Sampler(m_pd3dDevice);
-		samp->createSampleState(D3D11_FILTER_MIN_MAG_MIP_LINEAR,D3D11_TEXTURE_ADDRESS_CLAMP);
+		samp->createSampleState(D3D11_FILTER_MIN_MAG_MIP_LINEAR,D3D11_TEXTURE_ADDRESS_WRAP);
 		samp->useSamplerAt(m_pImmediateContext,0);
 		if( FAILED( hr ) )
 			exit(0);
 
-
+		View::setBorder(getWindowWidth(),getWindowHeight());
+		view=new View(m_pd3dDevice);
 
 	}
 	void cleanup(){

@@ -87,6 +87,14 @@ int WindowController::run()
 
 			m_fps = 1 / deltatime;
 
+			static float duration=1;
+			duration+=deltatime;
+			if(duration>1.0f)
+			{
+				duration=0;
+				updateFps();
+			}
+
 			this->render(deltatime);
 			
 			m_LastTime=tick;
@@ -107,6 +115,17 @@ int WindowController::run()
     }
 	cleanup();
 	return msg.wParam;
+}
+void WindowController::updateFps(){
+	static bool first=true;
+	static WCHAR buf[32];
+	static WCHAR dst[32];
+	if(first){
+		first=false;
+		GetWindowText(m_hWnd,buf,32);
+	}
+	swprintf_s(dst,L"%s fps : %f",buf,m_fps);
+	SetWindowText(m_hWnd,dst);
 }
 //--------------------------------------------------------------------------------------
 // Called every time the application receives a message

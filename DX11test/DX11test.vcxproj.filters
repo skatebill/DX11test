@@ -71,6 +71,9 @@
     <ClInclude Include="Texture.h">
       <Filter>UI\Resource\h</Filter>
     </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>UI\Resource\h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial00.cpp">
@@ -101,6 +104,9 @@
       <Filter>UI\Resource\cpp</Filter>
     </ClCompile>
     <ClCompile Include="Texture2D.cpp">
+      <Filter>UI\Resource\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
       <Filter>UI\Resource\cpp</Filter>
     </ClCompile>
   </ItemGroup>

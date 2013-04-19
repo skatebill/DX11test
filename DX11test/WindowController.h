@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <list>
 #include <map>
+#include <stdio.h>
 using namespace std;
 
 LRESULT CALLBACK    MainWndProc( HWND, UINT, WPARAM, LPARAM );
@@ -70,6 +71,7 @@ public:
 	void setFPS(float dstFPS){m_dstFps=dstFPS;}
 	void lockFPS(){isFPSLocked=true;}
 	void unlockFPS(){isFPSLocked=false;}
+	void updateFps();
 	virtual LRESULT CALLBACK    WndProc( HWND, UINT, WPARAM, LPARAM );
 	static list<WindowController*>* getAllWindow(){
 		int i=s_windowList->size();

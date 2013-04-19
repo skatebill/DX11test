@@ -75,6 +75,7 @@
   <ItemGroup>
     <ClInclude Include="2DBaseObject.h" />
     <ClInclude Include="DX11WBASE.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="MyObject.h" />
     <ClInclude Include="MyResource.h" />
     <ClInclude Include="Resource.h" />
@@ -88,6 +89,7 @@
   <ItemGroup>
     <ClCompile Include="2DBaseObject.cpp" />
     <ClCompile Include="DX11WBASE.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="MyResource.cpp" />
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />

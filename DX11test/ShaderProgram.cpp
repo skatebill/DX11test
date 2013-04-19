@@ -47,6 +47,13 @@ HRESULT ShaderProgram::loadShader(WCHAR* fileName)
 	return S_OK;
 }
 
+void ShaderProgram::setConstantBuffer(ID3D11DeviceContext* pContext,int slot,void* buffer)
+{	
+	pContext->UpdateSubresource( m_bufferMap[slot], 0, NULL, buffer, 0, 0 );
+	pContext->VSSetConstantBuffers(slot,1,&(m_bufferMap[slot]));
+}
+
+
 //--------------------------------------------------------------------------------------
 // Helper for compiling shaders with D3DX11
 //--------------------------------------------------------------------------------------
