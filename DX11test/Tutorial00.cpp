@@ -22,7 +22,9 @@
 #include "ModelMesh.h"
 #include "View.h"
 #include "phrase\Chunk.h"
-
+#include "ModelPhraser.h"
+#include "ModelGroup.h"
+#include "shaderResources.h"
 
 
 
@@ -76,6 +78,7 @@ View* view;
 class test:public DX11WBASE{
 private:
 	ShaderProgram *m_shader;
+	ShaderProgram *testshader;
 
 	XMMATRIX           m_World;
 	XMMATRIX           m_View;
@@ -85,6 +88,8 @@ private:
 	ID3D11Buffer*           m_pIndexBuffer;
 	ID3D11Buffer*           m_pConstantBuffer;
 
+	ModelMesh *testMesh;
+	ModelGroup* modelG;
 	int numTodraw;
 public:
 	test(HINSTANCE instance):DX11WBASE(instance),m_pVertexBuffer(0),m_pIndexBuffer(0),m_pConstantBuffer(0){};
@@ -98,6 +103,7 @@ public:
 		//
 		// Animate the cube
 		//
+
 		m_World = XMMatrixRotationY( t );
 
 
@@ -109,7 +115,7 @@ public:
 		cb.mView = XMMatrixTranspose( m_View );
 		cb.mProjection = XMMatrixTranspose( m_Projection);
 		m_pImmediateContext->UpdateSubresource( m_pConstantBuffer, 0, NULL, &cb, 0, 0 );
-		//m_shader->setConstantBuffer(m_pImmediateContext,0,&cb);
+		m_shader->setConstantBuffer(m_pImmediateContext,0,&cb);
 
 		//
 		// Renders a triangle
@@ -117,13 +123,20 @@ public:
 		m_pImmediateContext->VSSetShader( m_shader->getVertexShader(), NULL, 0 );
 		m_pImmediateContext->VSSetConstantBuffers( 0, 1, &m_pConstantBuffer );
 		m_pImmediateContext->PSSetShader( m_shader->getPixelShader(), NULL, 0 );
-		m_pImmediateContext->DrawIndexed( numTodraw, 0, 0 );        // 36 vertices needed for 12 triangles in a triangle list
+		//m_pImmediateContext->DrawIndexed( numTodraw, 0, 0 );        // 36 vertices needed for 12 triangles in a triangle list
+		//testMesh->draw(m_pImmediateContext);
+		modelG->draw(m_pImmediateContext);
 
+
+	
 		//view->draw(m_pImmediateContext);
 		m_pSwapChain->Present(0,0);
 	}
 	void intiData(){
 		
+		testMesh = new ModelMesh(m_pd3dDevice);
+	//	testMesh = getQuadModel(m_pd3dDevice,400,300);
+	//	testMesh->loadTexture("seafloor.dds");
 
 		chunkReader reader;
 		modelChunk = reader.readFile("456.BINARY");
@@ -136,9 +149,16 @@ public:
 		}
 
 		ModelMesh* people=new ModelMesh(m_pd3dDevice);
-
-		SimpleVertex *data=new SimpleVertex[numvertex];
+		VertexPU *data=new VertexPU[numvertex];
 		WORD*	index=new WORD[numvertex];
+
+		testshader=new ShaderProgram(m_pd3dDevice);
+		testshader->setLayout(CUSTOM_LAYOUT_PUB,CUSTOM_LAYOUT_PUB_NUM);
+		testshader->loadShader(L"boneAnime.fx");
+
+
+
+
 		for(int i=0;i<numvertex;i++)
 		{
 			index[i]=i;
@@ -151,16 +171,18 @@ public:
 			int meshVertexNum=meshc->indexlist.size();
 			for(int vi=0;vi<meshVertexNum;vi++)
 			{
-				data[curVertex].Pos=XMFLOAT3(meshc->vertexlist[meshc->indexlist[vi]->a]->pos.x,meshc->vertexlist[meshc->indexlist[vi]->a]->pos.y,meshc->vertexlist[meshc->indexlist[vi]->a]->pos.z);
+				data[curVertex].pos=XMFLOAT3(meshc->vertexlist[meshc->indexlist[vi]->a]->pos.x,meshc->vertexlist[meshc->indexlist[vi]->a]->pos.y,meshc->vertexlist[meshc->indexlist[vi]->a]->pos.z);
 				curVertex++;
-				data[curVertex].Pos=XMFLOAT3(meshc->vertexlist[meshc->indexlist[vi]->b]->pos.x,meshc->vertexlist[meshc->indexlist[vi]->b]->pos.y,meshc->vertexlist[meshc->indexlist[vi]->b]->pos.z);
+				data[curVertex].pos=XMFLOAT3(meshc->vertexlist[meshc->indexlist[vi]->b]->pos.x,meshc->vertexlist[meshc->indexlist[vi]->b]->pos.y,meshc->vertexlist[meshc->indexlist[vi]->b]->pos.z);
 				curVertex++;
-				data[curVertex].Pos=XMFLOAT3(meshc->vertexlist[meshc->indexlist[vi]->c]->pos.x,meshc->vertexlist[meshc->indexlist[vi]->c]->pos.y,meshc->vertexlist[meshc->indexlist[vi]->c]->pos.z);
+				data[curVertex].pos=XMFLOAT3(meshc->vertexlist[meshc->indexlist[vi]->c]->pos.x,meshc->vertexlist[meshc->indexlist[vi]->c]->pos.y,meshc->vertexlist[meshc->indexlist[vi]->c]->pos.z);
 				curVertex++;
 
 			}
 
 		}
+		testMesh->setVertexSource(data,sizeof(VertexPU),numvertex);
+		testMesh->setIndexSource(index,numvertex);
 		numTodraw=numvertex;
 
 		m_shader=new ShaderProgram(m_pd3dDevice);
@@ -196,7 +218,7 @@ public:
 		D3D11_BUFFER_DESC bd;
 		ZeroMemory( &bd, sizeof(bd) );
 		bd.Usage = D3D11_USAGE_DEFAULT;
-		bd.ByteWidth = sizeof( SimpleVertex ) * numvertex;
+		bd.ByteWidth = sizeof( VertexPU ) * numvertex;
 		bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		bd.CPUAccessFlags = 0;
 		D3D11_SUBRESOURCE_DATA InitData;
@@ -260,7 +282,7 @@ public:
 		model->useModel(m_pImmediateContext);*/
 		getQuadModel(m_pd3dDevice,1,1)->useModel(m_pImmediateContext);
 		// Set vertex buffer
-		UINT stride = sizeof( SimpleVertex );
+		UINT stride = sizeof( VertexPU );
 		UINT offset = 0;
 		m_pImmediateContext->IASetVertexBuffers( 0, 1, &m_pVertexBuffer, &stride, &offset );
 		// Set index buffer
@@ -301,8 +323,9 @@ public:
 
 		View::setBorder(getWindowWidth(),getWindowHeight());
 		view=new View(m_pd3dDevice);
-
-
+		
+		modelG = loadPUModel("456.BINARY",m_pd3dDevice);
+		modelG->useShader(m_shader);
 
 	}
 	void cleanup(){

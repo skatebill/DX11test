@@ -72,6 +72,7 @@ void chunkWriter::saveSubChunk(ChunkContainer& container){
 }
 void chunkWriter::saveMainChunk(mainChunk& chunk){
 	saveChunkHead(chunk);
+	writeFloat(chunk.frameRate);
 	saveSubChunk(chunk);
 }
 void chunkWriter::saveMeshChunk(meshChunk& chunk){
@@ -87,6 +88,13 @@ void chunkWriter::saveMeshChunk(meshChunk& chunk){
 		writeFloat((**ite).pos.x);
 		writeFloat((**ite).pos.y);
 		writeFloat((**ite).pos.z);
+
+
+		writeWord((**ite).vertexBoneInfo.size());
+		for(vector<boneInfo*>::iterator bite=(**ite).vertexBoneInfo.begin();bite!=(**ite).vertexBoneInfo.end();bite++){
+			writeWord((**bite).id);
+			writeFloat((**bite).weight);
+		}
 	}
 	for(vector<point2*>::iterator ite=chunk.texcoordlist.begin();ite!=chunk.texcoordlist.end();ite++){
 		writeFloat((**ite).u);
@@ -173,7 +181,7 @@ mainChunk* chunkReader::readMainChunk(){
 	}
 	mainChunk* m=new mainChunk;
 	m->length=head.length;
-
+	m->frameRate=readFloat();
 	int num=0;
 	while(num<head.length-CHUNK_HEAD_SIZE)
 	{
@@ -342,7 +350,15 @@ void chunkReader::readMeshChunk(ChunkHead &meshhead,meshGroupChunk &chunk){
 		x=readFloat();
 		y=readFloat();
 		z=readFloat();
-		m->vertexlist.push_back(new vertex(x,y,z));
+		vertex* ver=new vertex(x,y,z);
+		int boneNum=readWord();
+		while(boneNum--){
+			boneInfo* bonei=new boneInfo;
+			bonei->id=readWord();
+			bonei->weight=readFloat();
+			ver->vertexBoneInfo.push_back(bonei);
+		}
+		m->vertexlist.push_back(ver);
 
 	}
 	for(int i=0;i<texcoordnum;i++){

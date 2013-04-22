@@ -83,6 +83,15 @@
     <ClInclude Include="ModelMesh.h">
       <Filter>UI\Resource\h</Filter>
     </ClInclude>
+    <ClInclude Include="ModelGroup.h">
+      <Filter>UI\Resource\h</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelPhraser.h">
+      <Filter>pharser</Filter>
+    </ClInclude>
+    <ClInclude Include="shaderResources.h">
+      <Filter>myShaderProgram</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial00.cpp">
@@ -122,6 +131,9 @@
       <Filter>pharser</Filter>
     </ClCompile>
     <ClCompile Include="ModelMesh.cpp">
+      <Filter>UI\Resource\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelGroup.cpp">
       <Filter>UI\Resource\cpp</Filter>
     </ClCompile>
   </ItemGroup>

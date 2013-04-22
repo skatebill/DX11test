@@ -76,7 +76,9 @@
   <ItemGroup>
     <ClInclude Include="2DBaseObject.h" />
     <ClInclude Include="DX11WBASE.h" />
+    <ClInclude Include="ModelGroup.h" />
     <ClInclude Include="ModelMesh.h" />
+    <ClInclude Include="ModelPhraser.h" />
     <ClInclude Include="MyObject.h" />
     <ClInclude Include="MyResource.h" />
     <ClInclude Include="phrase\Chunk.h" />
@@ -84,6 +86,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="shaderResources.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Texture2D.h" />
     <ClInclude Include="View.h" />
@@ -92,6 +95,7 @@
   <ItemGroup>
     <ClCompile Include="2DBaseObject.cpp" />
     <ClCompile Include="DX11WBASE.cpp" />
+    <ClCompile Include="ModelGroup.cpp" />
     <ClCompile Include="ModelMesh.cpp" />
     <ClCompile Include="MyResource.cpp" />
     <ClCompile Include="phrase\chunkprocessor.cpp" />

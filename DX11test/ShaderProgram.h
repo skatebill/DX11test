@@ -47,6 +47,13 @@ public:
 
 	};
 
+	void use(ID3D11DeviceContext* pContext)
+	{
+		pContext->IASetInputLayout(getVertexLayout());
+		pContext->VSSetShader(getVertexShader(),0,0);
+		pContext->PSSetShader(getPixelShader(),0,0);
+	}
+
 	virtual HRESULT loadShader(WCHAR* fileName);
 	virtual void setLayout(D3D11_INPUT_ELEMENT_DESC* layout,int num){m_layout=layout;m_numElemnts=num;}
 };

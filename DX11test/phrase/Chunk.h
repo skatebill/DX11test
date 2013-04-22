@@ -15,10 +15,6 @@ namespace MYCHUNK{
 		float x,y,z;
 		point3(float _x = 0,float _y = 0,float _z = 0){ x=_x; y=_y; z=_z;}
 	};
-	struct vertex{
-		point3 pos;
-		vertex(float _x = 0,float _y = 0,float _z = 0){ pos=point3(_x,_y,_z);}
-	};
 	struct point2{
 		float u,v;
 		point2(float _u = 0,float _v = 0){ u=_u; v=_v;}
@@ -26,6 +22,23 @@ namespace MYCHUNK{
 	struct point4{
 		float x,y,z,w;
 		point4(float _x = 0,float _y = 0,float _z = 0,float _w=0){ x=_x; y=_y; z=_z;w=_w;}
+	};
+	struct boneTM{
+		point3 translate;
+		point4 rotate;
+	};
+	struct boneSample{
+		WORD key;
+		boneTM tm;
+	};
+	struct boneInfo{
+		WORD id;
+		float weight;
+	};
+	struct vertex{
+		point3 pos;
+		vector<boneInfo*> vertexBoneInfo;
+		vertex(float _x = 0,float _y = 0,float _z = 0){ pos=point3(_x,_y,_z);}
 	};
 	struct face{
 		WORD a,b,c;
@@ -41,14 +54,6 @@ namespace MYCHUNK{
 		void setTexCoordFace(WORD _a = 0,WORD _b = 0,WORD _c = 0){ ta=_a; tb=_b; tc=_c;}
 		void setNormalFace(WORD _a = 0,WORD _b = 0,WORD _c = 0){ na=_a; nb=_b; nc=_c;}
 		void setColorFace(WORD _a = 0,WORD _b = 0,WORD _c = 0){ ca=_a; cb=_b; cc=_c;}
-	};
-	struct boneTM{
-		point3 translate;
-		point4 rotate;
-	};
-	struct boneSample{
-		WORD key;
-		boneTM tm;
 	};
 	struct ChunkHead{
 		WORD id;
@@ -85,7 +90,12 @@ namespace MYCHUNK{
 	};
 	class mainChunk:public ChunkContainer{
 	public:
-		mainChunk():ChunkContainer(){id=MAINCHUNK;}
+		mainChunk():ChunkContainer(){
+			id=MAINCHUNK;
+			frameRate=0;
+		}
+
+		float frameRate;
 	};
 
 	class matrialGroupChunk:public ChunkContainer{

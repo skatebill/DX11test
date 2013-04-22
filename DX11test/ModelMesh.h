@@ -9,6 +9,11 @@ struct VertexPU{
 	XMFLOAT3 pos;
 	XMFLOAT2 tex;
 };
+struct VertexPNU{
+	XMFLOAT3 pos;
+	XMFLOAT3 normal;
+	XMFLOAT2 tex;
+};
 class ModelMesh:public MyResource
 {
 private:
@@ -21,6 +26,7 @@ private:
 	UINT m_Stride;
 
 	Texture2D *m_Texture;
+	int m_DefualtSlot;
 
 public:
 	ModelMesh(ID3D11Device*);
@@ -32,6 +38,7 @@ public:
 	bool setVertexSource(void*,int,int);
 	bool setIndexSource(void*,int);
 	bool loadTexture(char*);
+	void setTextureSlot(int slot){m_DefualtSlot=slot;}
 
 	ID3D11Buffer* getVertexBuffer();
 	ID3D11Buffer* getIndexBuffer();
@@ -40,7 +47,8 @@ public:
 		UINT offset=0;
 		context->IASetVertexBuffers( 0, 1, &m_VertexBuffer, &m_Stride, &offset );
 		// Set index buffer
-		context->IASetIndexBuffer( m_IndexBuffer, DXGI_FORMAT_R16_UINT, 0 );}
+		context->IASetIndexBuffer( m_IndexBuffer, DXGI_FORMAT_R16_UINT, 0 );
+	}
 	
 	void useModel(ID3D11DeviceContext* context,int slot){
 		UINT offset=0;
@@ -51,6 +59,15 @@ public:
 	}
 	int getIndexNum(){
 		return m_IndexNum;
+	}
+	void draw(ID3D11DeviceContext* context,int slot=-1)
+	{
+		if(slot==-1)
+		{
+			slot = m_DefualtSlot;
+		}
+		useModel(context,slot);
+		context->DrawIndexed(m_IndexNum,0,0);
 	}
 	void useTextureAt(ID3D11DeviceContext* context,int slot){
 		if(m_Texture){
