@@ -26,6 +26,7 @@ namespace MYCHUNK{
 	struct boneTM{
 		point3 translate;
 		point4 rotate;
+		boneTM():translate(),rotate(){}
 	};
 	struct boneSample{
 		WORD key;
@@ -94,8 +95,10 @@ namespace MYCHUNK{
 			id=MAINCHUNK;
 			frameRate=0;
 		}
-
 		float frameRate;
+		int computeLength(){
+			return 4+ChunkContainer::computeLength();
+		};
 	};
 
 	class matrialGroupChunk:public ChunkContainer{
@@ -191,7 +194,12 @@ namespace MYCHUNK{
 			//num part
 			length+=4*5;
 			//bool compute buffer
-			length+=vertexlist.size()*3*4;
+			length+=vertexlist.size()*(3*4+2);
+			int num=vertexlist.size();
+			for(int i=0;i<num;i++)
+			{
+				length+=vertexlist[i]->vertexBoneInfo.size()*6;
+			}
 			//tex
 			length+=texcoordlist.size()*2*4;
 			//normal

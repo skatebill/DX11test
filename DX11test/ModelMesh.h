@@ -14,28 +14,34 @@ struct VertexPNU{
 	XMFLOAT3 normal;
 	XMFLOAT2 tex;
 };
+struct VertexPUB{
+	XMFLOAT3 pos;
+	XMFLOAT2 tex;
+	float boneWeight[40];
+};
 class ModelMesh:public MyResource
 {
 private:
 	ID3D11Buffer* m_VertexBuffer;
 	ID3D11Buffer* m_IndexBuffer;
 
-	ID3D11Device* m_Device;
 	int m_IndexNum;
 	int m_NumVertex;
 	UINT m_Stride;
 
 	Texture2D *m_Texture;
 	int m_DefualtSlot;
+protected:
+	ID3D11Device* m_Device;
 
 public:
 	ModelMesh(ID3D11Device*);
-	~ModelMesh(void);
+	virtual ~ModelMesh(void);
 
 	void release();
 	bool isReleased();
 
-	bool setVertexSource(void*,int,int);
+	bool setVertexSource(void*,int stride,int numvertex);
 	bool setIndexSource(void*,int);
 	bool loadTexture(char*);
 	void setTextureSlot(int slot){m_DefualtSlot=slot;}

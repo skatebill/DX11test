@@ -75,6 +75,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2DBaseObject.h" />
+    <ClInclude Include="BonedMesh.h" />
+    <ClInclude Include="BonedMeshGroup.h" />
+    <ClInclude Include="BoneGroup.h" />
     <ClInclude Include="DX11WBASE.h" />
     <ClInclude Include="ModelGroup.h" />
     <ClInclude Include="ModelMesh.h" />
@@ -94,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DBaseObject.cpp" />
+    <ClCompile Include="BonedMesh.cpp" />
+    <ClCompile Include="BonedMeshGroup.cpp" />
+    <ClCompile Include="BoneGroup.cpp" />
     <ClCompile Include="DX11WBASE.cpp" />
     <ClCompile Include="ModelGroup.cpp" />
     <ClCompile Include="ModelMesh.cpp" />
@@ -107,6 +113,7 @@
     <ClCompile Include="Tutorial00.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="WindowController.cpp" />
+    <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

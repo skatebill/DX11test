@@ -5,6 +5,7 @@
 //
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //--------------------------------------------------------------------------------------
+/*
 #pragma comment(lib,"d3dcompiler.lib")
 #pragma comment(lib,"d3dx11.lib")
 //--------------------------------------------------------------------------------------
@@ -275,11 +276,6 @@ public:
 			exit(0);
 		
 
-		/*model=new Model(m_pd3dDevice);
-		model->setVertexSource(vertices,sizeof(SimpleVertex),8);
-		model->setIndexSource(indices,36);
-		
-		model->useModel(m_pImmediateContext);*/
 		getQuadModel(m_pd3dDevice,1,1)->useModel(m_pImmediateContext);
 		// Set vertex buffer
 		UINT stride = sizeof( VertexPU );
@@ -331,8 +327,8 @@ public:
 	void cleanup(){
 
 	}
-};
-
+};*/
+/*
 //--------------------------------------------------------------------------------------
 // Entry point to the program. Initializes everything and goes into a message processing 
 // loop. Idle time is used to render the scene.
@@ -346,3 +342,4 @@ int WINAPI wWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
     return 1;
 }
 
+*/

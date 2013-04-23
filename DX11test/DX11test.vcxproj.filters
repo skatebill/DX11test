@@ -92,6 +92,15 @@
     <ClInclude Include="shaderResources.h">
       <Filter>myShaderProgram</Filter>
     </ClInclude>
+    <ClInclude Include="BonedMesh.h">
+      <Filter>UI\Resource\h</Filter>
+    </ClInclude>
+    <ClInclude Include="BonedMeshGroup.h">
+      <Filter>UI\Resource\h</Filter>
+    </ClInclude>
+    <ClInclude Include="BoneGroup.h">
+      <Filter>UI\Resource\h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial00.cpp">
@@ -134,6 +143,18 @@
       <Filter>UI\Resource\cpp</Filter>
     </ClCompile>
     <ClCompile Include="ModelGroup.cpp">
+      <Filter>UI\Resource\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="winmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BonedMesh.cpp">
+      <Filter>UI\Resource\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BonedMeshGroup.cpp">
+      <Filter>UI\Resource\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneGroup.cpp">
       <Filter>UI\Resource\cpp</Filter>
     </ClCompile>
   </ItemGroup>

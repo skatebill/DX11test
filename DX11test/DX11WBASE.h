@@ -2,7 +2,10 @@
 #include "windowcontroller.h"
 #include <d3dx11.h>
 #pragma comment(lib,"d3d11.lib")
-
+typedef enum DrawMode{
+	Triangle,
+	Line
+}DrawMode;
 class DX11WBASE :
 	public WindowController
 {
@@ -23,6 +26,7 @@ public:
 
 	HRESULT initDevice();
 	void CleanupDevice();
+	void setDrawMode(DrawMode model);
 
 	
 	virtual void render(float delta)=0;

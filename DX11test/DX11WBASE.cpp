@@ -96,7 +96,8 @@ HRESULT DX11WBASE::createWindow(LPCWSTR title,int w,int h,bool fullscreen)
     vp.TopLeftX = 0;
     vp.TopLeftY = 0;
     m_pImmediateContext->RSSetViewports( 1, &vp );
-
+	
+	m_pImmediateContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
     return S_OK;
 
 }
@@ -110,4 +111,32 @@ void DX11WBASE::CleanupDevice(){
     if( m_pImmediateContext ) m_pImmediateContext->Release();
     if( m_pd3dDevice ) m_pd3dDevice->Release();
 
+}
+void DX11WBASE::setDrawMode(DrawMode model){
+	D3D11_RASTERIZER_DESC rasterDesc;
+
+	rasterDesc.AntialiasedLineEnable = false;  
+	rasterDesc.CullMode = D3D11_CULL_BACK;  
+	rasterDesc.DepthBias = 0;  
+	rasterDesc.DepthBiasClamp = 0.0f;  
+	rasterDesc.DepthClipEnable = true;  
+	rasterDesc.FrontCounterClockwise = false;  
+	rasterDesc.MultisampleEnable = false;  
+	rasterDesc.ScissorEnable = false;  
+	rasterDesc.SlopeScaledDepthBias = 0.0f;  
+	ID3D11RasterizerState* state;
+	switch(model){
+	case Triangle:
+		rasterDesc.FillMode = D3D11_FILL_SOLID;  
+		break;
+	case Line:
+		rasterDesc.FillMode = D3D11_FILL_WIREFRAME;  
+		break;
+	default:
+		break;
+	}
+
+
+	m_pd3dDevice->CreateRasterizerState(&rasterDesc,&state);
+	m_pImmediateContext->RSSetState(state);
 }
