@@ -17,6 +17,7 @@ protected:
 	ID3D11DeviceContext*    m_pImmediateContext;
 	IDXGISwapChain*         m_pSwapChain;
 	ID3D11RenderTargetView* m_pRenderTargetView;
+	ID3D11DepthStencilView* m_depthStencilView;
 
 public:
 	DX11WBASE(HINSTANCE instance);

@@ -72,12 +72,12 @@ void chunkWriter::saveSubChunk(ChunkContainer& container){
 }
 void chunkWriter::saveMainChunk(mainChunk& chunk){
 	saveChunkHead(chunk);
-	writeFloat(chunk.frameRate);
 	saveSubChunk(chunk);
 }
 void chunkWriter::saveMeshChunk(meshChunk& chunk){
 	saveChunkHead(chunk);
 
+	writeString(chunk.matName);
 	writeDWord(chunk.vertexlist.size());
 	writeDWord(chunk.texcoordlist.size());
 	writeDWord(chunk.normallist.size());
@@ -88,12 +88,12 @@ void chunkWriter::saveMeshChunk(meshChunk& chunk){
 		writeFloat((**ite).pos.x);
 		writeFloat((**ite).pos.y);
 		writeFloat((**ite).pos.z);
-
-
-		writeWord((**ite).vertexBoneInfo.size());
-		for(vector<boneInfo*>::iterator bite=(**ite).vertexBoneInfo.begin();bite!=(**ite).vertexBoneInfo.end();bite++){
-			writeWord((**bite).id);
-			writeFloat((**bite).weight);
+		WORD num=(**ite).vertexBoneInfo.size();
+		writeWord(num);
+		for(int i=0;i<num;i++)
+		{
+			writeWord((**ite).vertexBoneInfo[i]->id);
+			writeFloat((**ite).vertexBoneInfo[i]->weight);
 		}
 	}
 	for(vector<point2*>::iterator ite=chunk.texcoordlist.begin();ite!=chunk.texcoordlist.end();ite++){
@@ -138,7 +138,7 @@ void chunkWriter::saveMeshChunk(meshChunk& chunk){
 void chunkWriter::saveMatrialChunk(matrialChunk &chunk){
 	saveChunkHead(chunk);
 	//mat id
-	writeWord(chunk.matID);
+	writeString(chunk.matName);
 	//abm
 	writeFloat(chunk.amb.x);
 	writeFloat(chunk.amb.y);
@@ -181,7 +181,7 @@ mainChunk* chunkReader::readMainChunk(){
 	}
 	mainChunk* m=new mainChunk;
 	m->length=head.length;
-	m->frameRate=readFloat();
+
 	int num=0;
 	while(num<head.length-CHUNK_HEAD_SIZE)
 	{
@@ -269,8 +269,10 @@ void chunkReader::readMatrialChunk(ChunkHead &meshhead,matrialGroupChunk &chunk)
 	matrialChunk *m=new matrialChunk;
 	m->length=meshhead.length;
 	chunk.addSunChunk(*m);
-	//mat id
-	m->matID=readWord();
+	//mat name
+	char* buf=(char*)malloc(256);
+	readString(buf);
+	m->matName=buf;
 	//amb
 	m->amb.x=readFloat();
 	m->amb.y=readFloat();
@@ -338,7 +340,9 @@ void chunkReader::readMeshChunk(ChunkHead &meshhead,meshGroupChunk &chunk){
 	meshChunk *m=new meshChunk;
 	m->length=meshhead.length;
 	chunk.addSunChunk(*m);
-
+	char* buf=(char*)malloc(256);
+	readString(buf);
+	m->matName=buf;
 	DWORD vertexnum=readDWord();
 	DWORD texcoordnum=readDWord();
 	DWORD normalnum=readDWord();
@@ -350,15 +354,19 @@ void chunkReader::readMeshChunk(ChunkHead &meshhead,meshGroupChunk &chunk){
 		x=readFloat();
 		y=readFloat();
 		z=readFloat();
-		vertex* ver=new vertex(x,y,z);
-		int boneNum=readWord();
-		while(boneNum--){
-			boneInfo* bonei=new boneInfo;
-			bonei->id=readWord();
-			bonei->weight=readFloat();
-			ver->vertexBoneInfo.push_back(bonei);
+
+		vertex* v=new vertex(x,y,z);
+		WORD num=readWord();
+		for(int i=0;i<num;i++)
+		{
+			boneInfo* info=new boneInfo;
+			info->id=readWord();
+			info->weight = readFloat();
+			v->vertexBoneInfo.push_back(info);
 		}
-		m->vertexlist.push_back(ver);
+
+
+		m->vertexlist.push_back(v);
 
 	}
 	for(int i=0;i<texcoordnum;i++){

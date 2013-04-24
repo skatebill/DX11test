@@ -4,12 +4,13 @@
 DX11WBASE::DX11WBASE(HINSTANCE instance):WindowController(instance)
 {
 	
-	D3D_DRIVER_TYPE         m_driverType = D3D_DRIVER_TYPE_NULL;
-	D3D_FEATURE_LEVEL       m_featureLevel = D3D_FEATURE_LEVEL_11_0;
-	ID3D11Device*           m_pd3dDevice = NULL;
-	ID3D11DeviceContext*    m_pImmediateContext = NULL;
-	IDXGISwapChain*         m_pSwapChain = NULL;
-	ID3D11RenderTargetView* m_pRenderTargetView = NULL;
+	m_driverType = D3D_DRIVER_TYPE_NULL;
+	m_featureLevel = D3D_FEATURE_LEVEL_11_0;
+	m_pd3dDevice = NULL;
+	m_pImmediateContext = NULL;
+	m_pSwapChain = NULL;
+	m_pRenderTargetView = NULL;
+	m_depthStencilView = NULL;
 }
 
 
@@ -85,7 +86,43 @@ HRESULT DX11WBASE::createWindow(LPCWSTR title,int w,int h,bool fullscreen)
     if( FAILED( hr ) )
         return hr;
 
-    m_pImmediateContext->OMSetRenderTargets( 1, &m_pRenderTargetView, NULL );
+	ID3D11Texture2D* m_depthStencilBuffer;
+	D3D11_TEXTURE2D_DESC dsDesc;  
+	dsDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;  
+	dsDesc.Width = getWindowWidth();  
+	dsDesc.Height = getWindowHeight();  
+	dsDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;  
+	dsDesc.MipLevels = 1;  
+	dsDesc.ArraySize = 1;  
+	dsDesc.CPUAccessFlags = 0;  
+	dsDesc.SampleDesc.Count = 1;  
+	dsDesc.SampleDesc.Quality = 0;  
+	dsDesc.MiscFlags = 0;  
+	dsDesc.Usage = D3D11_USAGE_DEFAULT;  
+	hr = m_pd3dDevice->CreateTexture2D(&dsDesc,0,&m_depthStencilBuffer);  
+	
+	if(FAILED(hr))  
+	{  
+		MessageBox(NULL,L"Create depth stencil buffer failed!",L"ERROR",MB_OK);  
+		return false;  
+	} 
+	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
+    ZeroMemory( &descDSV, sizeof(descDSV) );
+    descDSV.Format = dsDesc.Format;
+    descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+    descDSV.Texture2D.MipSlice = 0;
+	hr = m_pd3dDevice->CreateDepthStencilView(m_depthStencilBuffer,&descDSV,&m_depthStencilView);  
+	if(FAILED(hr))  
+	{  
+		MessageBox(NULL,L"Create depth stencil view failed!",L"ERROR",MB_OK);  
+		return false;  
+	}  
+	//m_pImmediateContext->OMSetRenderTargets(1,&m_depthStencilView,m_depthStencilView);  
+
+
+
+
+    m_pImmediateContext->OMSetRenderTargets( 1, &m_pRenderTargetView, m_depthStencilView );
 
     // Setup the viewport
     D3D11_VIEWPORT vp;

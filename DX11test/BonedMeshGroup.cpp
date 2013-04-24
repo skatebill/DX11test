@@ -17,10 +17,16 @@ void BonedMeshGroup::addBonedMesh(BonedMesh* m){
 }
 void BonedMeshGroup::draw(ID3D11DeviceContext* context){
 	ModelGroup::draw(context);
-	
+	int i=0;
+	m_CurFrame+=0.1333f;
+	if(m_CurFrame>578)
+	{
+		m_CurFrame=0;
+	}
 	for(std::vector<BonedMesh*>::iterator ite=m_BonedMeshList.begin();ite!=m_BonedMeshList.end();ite++)
 	{
 		boneConstantBuffer* buf=getBoneConstantBuffer((**ite).getBoneList(),(**ite).getBoneNum());
+		
 		updateConstantbuffer(context,1,buf->boneTrans);
 		(**ite).draw(context);
 		delete(buf->boneTrans);
@@ -38,22 +44,13 @@ boneConstantBuffer* BonedMeshGroup::getBoneConstantBuffer(int* ids,int num){
 		memcpy(&m[i],&rmatrix,64);
 
 	}
-	m_CurFrame+=0.0333f;
-	if(m_CurFrame>100)
-	{
-		m_CurFrame=0;
-	}
 	for(int i=0;i<num;i++)
 	{
 		boneSample sample=m_bgroup->getBoneSample(ids[i],(int)m_CurFrame);
 		boneTM first=m_bgroup->getBone(ids[i])->getFirstTM();
-		XMMATRIX rmatrix=XMMatrixTranslation(-first.translate.x,-first.translate.y,-first.translate.z);
-		XMVECTOR t=XMVectorSet(first.rotate.x,first.rotate.y,first.rotate.z,0);
-		t=XMVector3Normalize(t);
-		rmatrix=rmatrix*XMMatrixRotationAxis(t,first.rotate.w );
-		t=XMVectorSet(sample.tm.rotate.x,sample.tm.rotate.y,sample.tm.rotate.z,0);
-		t=XMVector3Normalize(t);
-		rmatrix=rmatrix*XMMatrixRotationAxis(t,-sample.tm.rotate.w  );
+		XMMATRIX rmatrix=XMMatrixTranslation(-first.translate.x,-first.translate.y,-first.translate.z);		
+		rmatrix*=XMMatrixRotationQuaternion(XMVectorSet(first.rotate.x,first.rotate.y,first.rotate.z,first.rotate.w));
+		rmatrix*=XMMatrixRotationQuaternion(XMVectorSet(sample.tm.rotate.x,sample.tm.rotate.y,sample.tm.rotate.z,-sample.tm.rotate.w));
 		rmatrix=rmatrix*XMMatrixTranslation(sample.tm.translate.x,sample.tm.translate.y,sample.tm.translate.z);
 		rmatrix=XMMatrixTranspose(rmatrix);
 		memcpy(&m[i],&rmatrix,64);

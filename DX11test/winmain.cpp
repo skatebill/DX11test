@@ -6,6 +6,7 @@
 #include "ModelGroup.h"
 #include "ModelPhraser.h"
 #include "shaderResources.h"
+#include "Sampler.h"
 
 struct ConstantBuffer
 {
@@ -45,6 +46,7 @@ public:
 		void render(float delta){
 		float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; // red,green,blue,alpha
 		m_pImmediateContext->ClearRenderTargetView( m_pRenderTargetView, ClearColor );
+		m_pImmediateContext->ClearDepthStencilView(m_depthStencilView,D3D11_CLEAR_DEPTH,1.0,0);
 		static float t=0;
 		t+=delta;
 //		m_World = XMMatrixRotationY(t);
@@ -72,14 +74,13 @@ public:
 		m_World = XMMatrixIdentity();
 
 		// Initialize the view matrix
-		XMVECTOR Eye = XMVectorSet( 0, 0, -2.0, 0.0f );
-		XMVECTOR At = XMVectorSet( 0.0f, 0.0f, 0.0f, 0.0f );
+		XMVECTOR Eye = XMVectorSet( 0, 1, -2.0, 0.0f );
+		XMVECTOR At = XMVectorSet( 0.0f, 1.0f, 0.0f, 0.0f );
 		XMVECTOR Up = XMVectorSet( 0.0f, 1.0f, 0.0f, 0.0f );
 		m_View = XMMatrixLookAtLH( Eye, At, Up );
 
 		// Initialize the projection matrix
 		m_Projection = XMMatrixPerspectiveFovLH( XM_PIDIV2, getWindowWidth() / (FLOAT)getWindowHeight(), 0.01f, 1000.0f );
-		setDrawMode(Line);		
 
 		
 		bone_shader =new ShaderProgram(m_pd3dDevice);
@@ -105,7 +106,35 @@ public:
 		bone=new ModelGroup(m_pd3dDevice);
 		bone->useShader(bone_shader);
 		bone->addMesh(boneTest);
+		
+		Sampler* samp=new Sampler(m_pd3dDevice);
+		samp->createSampleState(D3D11_FILTER_MIN_MAG_MIP_LINEAR,D3D11_TEXTURE_ADDRESS_WRAP);
+		samp->useSamplerAt(m_pImmediateContext,0);
+		
+	/*D3D11_DEPTH_STENCIL_DESC drawRefDesc;
+	drawRefDesc.DepthEnable = true;
+	drawRefDesc.DepthFunc = D3D11_COMPARISON_LESS;
+	drawRefDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	drawRefDesc.StencilEnable = true;
+	drawRefDesc.StencilReadMask = D3D11_DEFAULT_STENCIL_READ_MASK;
+	drawRefDesc.StencilWriteMask = D3D11_DEFAULT_STENCIL_WRITE_MASK;
+	drawRefDesc.FrontFace.StencilFunc = D3D11_COMPARISON_EQUAL;
+	drawRefDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	drawRefDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+	drawRefDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	drawRefDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+	drawRefDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_REPLACE;
+	drawRefDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+	drawRefDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
 
+
+	ID3D11DepthStencilState* stateOut=0;
+	if(FAILED(m_pd3dDevice->CreateDepthStencilState(&drawRefDesc,&stateOut)))
+	{
+		MessageBox(NULL,L"Create 'DrawReflection' depth stencil state failed!",L"Error",MB_OK);
+	}
+	m_pImmediateContext->OMSetDepthStencilState(stateOut,0x1);*/
+	setDrawMode(Triangle);		
 	}
 	void cleanup(){
 

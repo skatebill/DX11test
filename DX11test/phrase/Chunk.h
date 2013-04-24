@@ -23,24 +23,6 @@ namespace MYCHUNK{
 		float x,y,z,w;
 		point4(float _x = 0,float _y = 0,float _z = 0,float _w=0){ x=_x; y=_y; z=_z;w=_w;}
 	};
-	struct boneTM{
-		point3 translate;
-		point4 rotate;
-		boneTM():translate(),rotate(){}
-	};
-	struct boneSample{
-		WORD key;
-		boneTM tm;
-	};
-	struct boneInfo{
-		WORD id;
-		float weight;
-	};
-	struct vertex{
-		point3 pos;
-		vector<boneInfo*> vertexBoneInfo;
-		vertex(float _x = 0,float _y = 0,float _z = 0){ pos=point3(_x,_y,_z);}
-	};
 	struct face{
 		WORD a,b,c;
 		WORD ta,tb,tc;
@@ -56,6 +38,23 @@ namespace MYCHUNK{
 		void setNormalFace(WORD _a = 0,WORD _b = 0,WORD _c = 0){ na=_a; nb=_b; nc=_c;}
 		void setColorFace(WORD _a = 0,WORD _b = 0,WORD _c = 0){ ca=_a; cb=_b; cc=_c;}
 	};
+	struct boneTM{
+		point3 translate;
+		point4 rotate;
+	};
+	struct boneSample{
+		WORD key;
+		boneTM tm;
+	};
+	struct boneInfo{
+		WORD id;
+		float weight;
+	};
+	struct vertex{
+		point3 pos;
+		vector<boneInfo*> vertexBoneInfo;
+		vertex(float _x = 0,float _y = 0,float _z = 0){ pos=point3(_x,_y,_z);}
+	};
 	struct ChunkHead{
 		WORD id;
 		DWORD length;
@@ -67,7 +66,7 @@ namespace MYCHUNK{
 
 		chunk():id(0),length(0){}
 		virtual int computeLength()=0;
-	};	
+	};
 
 	class ChunkContainer:public chunk{
 	public:
@@ -87,18 +86,11 @@ namespace MYCHUNK{
 			subchunk.push_back(&c);
 		}
 
-		int getSubCount(){return subchunk.size();}
+		int getSunCount(){return subchunk.size();}
 	};
 	class mainChunk:public ChunkContainer{
 	public:
-		mainChunk():ChunkContainer(){
-			id=MAINCHUNK;
-			frameRate=0;
-		}
-		float frameRate;
-		int computeLength(){
-			return 4+ChunkContainer::computeLength();
-		};
+		mainChunk():ChunkContainer(){id=MAINCHUNK;}
 	};
 
 	class matrialGroupChunk:public ChunkContainer{
@@ -144,11 +136,11 @@ namespace MYCHUNK{
 	public:
 		matrialChunk():chunk(){
 			id=MATRIALCHUNK;
-			matID=0;
+			matName="";
 			hasTexture=false;
 			textureName=0;
 		}
-		WORD matID;
+		char* matName;
 
 		point4 amb;
 		point4 dif;
@@ -158,8 +150,8 @@ namespace MYCHUNK{
 		char* textureName;
 		int computeLength(){
 			length=CHUNK_HEAD_SIZE;
-			//matid
-			length+=2;
+			//mat name
+			length+=strlen(matName)+1;
 			//amb
 			length+=4*4;
 			//dif
@@ -169,7 +161,7 @@ namespace MYCHUNK{
 			//tex
 			length+=1;
 			if(hasTexture&&textureName)
-				length+=strlen(textureName);
+				length+=strlen(textureName)+1;
 			return length;
 
 		}
@@ -180,8 +172,10 @@ namespace MYCHUNK{
 	public:
 		meshChunk():chunk(){
 			id=MESHCHUNK;
+			matName="";
 		}
 
+		char* matName;
 		vector<vertex*>	vertexlist;
 		vector<point2*>	texcoordlist;
 		vector<point3*>	normallist;
@@ -191,13 +185,16 @@ namespace MYCHUNK{
 		int computeLength(){
 			//head
 			length=CHUNK_HEAD_SIZE;
+			//mat id
+			length+=strlen(matName)+1;
 			//num part
 			length+=4*5;
 			//bool compute buffer
-			length+=vertexlist.size()*(3*4+2);
+			length+=vertexlist.size()*3*4;
 			int num=vertexlist.size();
 			for(int i=0;i<num;i++)
 			{
+				length+=2;
 				length+=vertexlist[i]->vertexBoneInfo.size()*6;
 			}
 			//tex
