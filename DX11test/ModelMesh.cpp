@@ -59,14 +59,14 @@ bool ModelMesh::setIndexSource(void* data,int indexNum)
 
 	return true;
 }
-bool ModelMesh::loadTexture(char* texName){
+bool ModelMesh::loadTexture(char* texName,ID3D11DeviceContext* context){
 	if(m_Texture)
 	{
 		m_Texture->release();
 	}
 	m_Texture=new Texture2D(m_Device);
 	m_DefualtSlot = 0;
-	return m_Texture->loadFromFile(texName);
+	return m_Texture->loadFromFile(texName,context);
 }
 
 

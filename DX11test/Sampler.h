@@ -11,7 +11,7 @@ public:
 	Sampler(ID3D11Device*);
 	~Sampler(void);
 	
-	bool createSampleState(D3D11_FILTER,D3D11_TEXTURE_ADDRESS_MODE);
+	bool createSampleState(D3D11_FILTER,D3D11_TEXTURE_ADDRESS_MODE,float mipOffset=0);
 	ID3D11SamplerState* getSampleState();
 	void release();
 	bool isReleased();

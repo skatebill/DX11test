@@ -40,13 +40,17 @@ HRESULT DX11WBASE::createWindow(LPCWSTR title,int w,int h,bool fullscreen)
 
     D3D_DRIVER_TYPE driverTypes[] =
     {
+        D3D_DRIVER_TYPE_HARDWARE,
+        D3D_DRIVER_TYPE_HARDWARE,
         D3D_DRIVER_TYPE_HARDWARE
     };
     UINT numDriverTypes = ARRAYSIZE( driverTypes );
 
     D3D_FEATURE_LEVEL featureLevels[] =
     {
-        D3D_FEATURE_LEVEL_10_0
+        D3D_FEATURE_LEVEL_11_0,
+        D3D_FEATURE_LEVEL_10_0,
+        D3D_FEATURE_LEVEL_9_3
     };
 	UINT numFeatureLevels = ARRAYSIZE( featureLevels );
 
@@ -92,7 +96,7 @@ HRESULT DX11WBASE::createWindow(LPCWSTR title,int w,int h,bool fullscreen)
 	dsDesc.Width = getWindowWidth();  
 	dsDesc.Height = getWindowHeight();  
 	dsDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;  
-	dsDesc.MipLevels = 1;  
+	dsDesc.MipLevels = 0;  
 	dsDesc.ArraySize = 1;  
 	dsDesc.CPUAccessFlags = 0;  
 	dsDesc.SampleDesc.Count = 1;  

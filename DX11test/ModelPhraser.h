@@ -92,7 +92,7 @@ ModelGroup* loadPUModel(char* filename,ID3D11Device* device)
 
 
 
-BonedMeshGroup* loadPUBModel(char* filename,ID3D11Device* device)
+BonedMeshGroup* loadPUBModel(char* filename,ID3D11Device* device,ID3D11DeviceContext* context)
 {
 	BonedMeshGroup* result=new BonedMeshGroup(device);
 	mainChunk* data = reader.readFile(filename);
@@ -320,7 +320,7 @@ BonedMeshGroup* loadPUBModel(char* filename,ID3D11Device* device)
 			matrialChunk* mat=(matrialChunk*)matG->subchunk[i];
 			if(strcmp(mat->matName,mesh->matName)==0)
 			{
-				bool r=m->loadTexture(mat->textureName);
+				bool r=m->loadTexture(mat->textureName,context);
 				if(r)
 				{
 					int k=0;

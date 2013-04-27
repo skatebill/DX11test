@@ -44,6 +44,7 @@ public:
 	bool setVertexSource(void*,int stride,int numvertex);
 	bool setIndexSource(void*,int);
 	bool loadTexture(char*);
+	bool loadTexture(char*,ID3D11DeviceContext*);
 	void setTextureSlot(int slot){m_DefualtSlot=slot;}
 
 	ID3D11Buffer* getVertexBuffer();

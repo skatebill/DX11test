@@ -9,7 +9,7 @@ public:
 	Texture(void);
 	~Texture(void);
 
-	virtual bool loadFromFile(LPWCH)=0;
+	virtual bool loadFromFile(LPWCH,ID3D11DeviceContext* context)=0;
 	virtual ID3D11ShaderResourceView* getTexture()=0;
 };
 

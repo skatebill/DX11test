@@ -79,6 +79,7 @@
     <ClInclude Include="BonedMeshGroup.h" />
     <ClInclude Include="BoneGroup.h" />
     <ClInclude Include="DX11WBASE.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="ModelGroup.h" />
     <ClInclude Include="ModelMesh.h" />
     <ClInclude Include="ModelPhraser.h" />

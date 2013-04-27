@@ -13,8 +13,9 @@ public:
 	Texture2D(ID3D11Device *device);
 	~Texture2D(void);
 
-	bool loadFromFile(LPWCH);
-	bool loadFromFile(char*);
+	bool loadFromFile(LPWCH,ID3D11DeviceContext* context);
+	bool loadFromFile(char* filename,ID3D11DeviceContext* context);
+
 	ID3D11ShaderResourceView* getTexture();
 	void release();
 	bool isReleased();
