@@ -1,7 +1,7 @@
 #pragma once
 #include "MyResource.h"
 #include "ModelMesh.h"
-#include "ShaderProgram.h"
+#include "..\..\winbase\dx11\ShaderProgram.h"
 #include <vector>
 class ModelGroup :
 	public MyResource

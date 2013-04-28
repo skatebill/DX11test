@@ -1,5 +1,5 @@
 #pragma once
-#include "MyObject.h"
+#include "..\MyObject.h"
 using namespace myprogram;
 class MyResource :
 	public MyObject

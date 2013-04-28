@@ -1,5 +1,5 @@
 #pragma once
-#include "windowcontroller.h"
+#include "../windowcontroller.h"
 #include <d3dx11.h>
 #pragma comment(lib,"d3d11.lib")
 typedef enum DrawMode{

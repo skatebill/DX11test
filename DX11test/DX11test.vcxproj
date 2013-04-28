@@ -37,10 +37,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Microsoft DirectX SDK (June 2010)\Include;$(IncludePath)</IncludePath>
+    <IncludePath>E:\Microsoft DirectX SDK (June 2010)\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ReferencePath>D:\Microsoft DirectX SDK (June 2010)\Lib\x86;$(ReferencePath)</ReferencePath>
+    <ReferencePath>E:\Microsoft DirectX SDK (June 2010)\Lib\x86;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>E:\Microsoft DirectX SDK (June 2010)\Include;$(IncludePath)</IncludePath>
@@ -54,7 +54,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua5.1.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,49 +71,57 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="FX\boneAnime.fx" />
+    <None Include="FX\Tutorial02.fx" />
+    <None Include="FX\Tutorial03.fx" />
+    <None Include="FX\Tutorial04.fx" />
     <None Include="Tutorial00.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="2DBaseObject.h" />
-    <ClInclude Include="BonedMesh.h" />
-    <ClInclude Include="BonedMeshGroup.h" />
-    <ClInclude Include="BoneGroup.h" />
-    <ClInclude Include="DX11WBASE.h" />
-    <ClInclude Include="Effect.h" />
-    <ClInclude Include="ModelGroup.h" />
-    <ClInclude Include="ModelMesh.h" />
+    <ClInclude Include="lua\Lua_Function.h" />
+    <ClInclude Include="lua\MyLuaManager.h" />
     <ClInclude Include="ModelPhraser.h" />
-    <ClInclude Include="MyObject.h" />
-    <ClInclude Include="MyResource.h" />
+    <ClInclude Include="MyProgram\2d\2DBaseObject.h" />
+    <ClInclude Include="MyProgram\2d\View.h" />
+    <ClInclude Include="MyProgram\Effect.h" />
+    <ClInclude Include="MyProgram\MyObject.h" />
+    <ClInclude Include="MyProgram\resources\BonedMesh.h" />
+    <ClInclude Include="MyProgram\resources\BonedMeshGroup.h" />
+    <ClInclude Include="MyProgram\resources\BoneGroup.h" />
+    <ClInclude Include="MyProgram\resources\ModelGroup.h" />
+    <ClInclude Include="MyProgram\resources\ModelMesh.h" />
+    <ClInclude Include="MyProgram\resources\ModelPhraser.h" />
+    <ClInclude Include="MyProgram\resources\MyResource.h" />
+    <ClInclude Include="MyProgram\resources\Sampler.h" />
+    <ClInclude Include="MyProgram\resources\Texture.h" />
+    <ClInclude Include="MyProgram\resources\Texture2D.h" />
     <ClInclude Include="phrase\Chunk.h" />
     <ClInclude Include="phrase\FileProcessor.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="Sampler.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="shaderResources.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Texture2D.h" />
-    <ClInclude Include="View.h" />
-    <ClInclude Include="WindowController.h" />
+    <ClInclude Include="winbase\dx11\DX11WBASE.h" />
+    <ClInclude Include="winbase\dx11\ShaderProgram.h" />
+    <ClInclude Include="winbase\dx11\shaderResources.h" />
+    <ClInclude Include="winbase\WindowController.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2DBaseObject.cpp" />
-    <ClCompile Include="BonedMesh.cpp" />
-    <ClCompile Include="BonedMeshGroup.cpp" />
-    <ClCompile Include="BoneGroup.cpp" />
-    <ClCompile Include="DX11WBASE.cpp" />
-    <ClCompile Include="ModelGroup.cpp" />
-    <ClCompile Include="ModelMesh.cpp" />
-    <ClCompile Include="MyResource.cpp" />
+    <ClCompile Include="lua\MyLuaManager.cpp" />
+    <ClCompile Include="MyProgram\2d\2DBaseObject.cpp" />
+    <ClCompile Include="MyProgram\2d\View.cpp" />
+    <ClCompile Include="MyProgram\resources\BonedMesh.cpp" />
+    <ClCompile Include="MyProgram\resources\BonedMeshGroup.cpp" />
+    <ClCompile Include="MyProgram\resources\BoneGroup.cpp" />
+    <ClCompile Include="MyProgram\resources\ModelGroup.cpp" />
+    <ClCompile Include="MyProgram\resources\ModelMesh.cpp" />
+    <ClCompile Include="MyProgram\resources\MyResource.cpp" />
+    <ClCompile Include="MyProgram\resources\Sampler.cpp" />
+    <ClCompile Include="MyProgram\resources\Texture.cpp" />
+    <ClCompile Include="MyProgram\resources\Texture2D.cpp" />
     <ClCompile Include="phrase\chunkprocessor.cpp" />
     <ClCompile Include="phrase\FileProcessor.cpp" />
-    <ClCompile Include="Sampler.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Texture2D.cpp" />
     <ClCompile Include="Tutorial00.cpp" />
-    <ClCompile Include="View.cpp" />
-    <ClCompile Include="WindowController.cpp" />
+    <ClCompile Include="winbase\dx11\DX11WBASE.cpp" />
+    <ClCompile Include="winbase\dx11\ShaderProgram.cpp" />
+    <ClCompile Include="winbase\WindowController.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

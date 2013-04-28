@@ -1,7 +1,7 @@
 #include <d3dx11.h>
 #include <xnamath.h>
-#include "ModelMesh.h"
-#include "Effect.h"
+#include "..\resources\ModelGroup.h"
+#include "..\resources\Effect.h"
 
 namespace myprogram{
 	struct ViewProMatrix{		

@@ -13,66 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="myShaderProgram">
-      <UniqueIdentifier>{3be36d8e-246d-4463-ab38-36b1008d89c7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{b072b8f2-5fa2-4842-a56e-57f76c46ca75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\2D">
-      <UniqueIdentifier>{d1a98594-dcba-4cc8-8d1a-bc566708d4a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Resource">
-      <UniqueIdentifier>{769d2424-1995-4607-b480-f0d7e0a10b1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Resource\h">
-      <UniqueIdentifier>{0302755b-5cde-4501-9293-7c03279ab26d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Resource\cpp">
-      <UniqueIdentifier>{1e46870d-c15d-4ae5-84b9-23dff1adad0f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="pharser">
       <UniqueIdentifier>{0aba44e4-5dad-458f-9eb0-5e00f5950bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="winbase">
+      <UniqueIdentifier>{08514ec8-85ec-40c4-ae57-18b0b0a1f3c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="winbase\dx11">
+      <UniqueIdentifier>{6b08491b-efb5-4805-a848-ce5d624149a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram">
+      <UniqueIdentifier>{3be36d8e-246d-4463-ab38-36b1008d89c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\2d">
+      <UniqueIdentifier>{4c29b262-0b11-4bee-be11-65624ac5ca7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\resources">
+      <UniqueIdentifier>{fd38480b-6892-4f84-8fac-f1fecc8183ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua">
+      <UniqueIdentifier>{7252966a-7b1a-4a5a-b100-c1a084cdf52a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FX">
+      <UniqueIdentifier>{6c55466a-6a9e-40f3-a30b-961bfe86dab5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Tutorial00.jpg">
       <Filter>头文件</Filter>
     </None>
+    <None Include="FX\boneAnime.fx">
+      <Filter>FX</Filter>
+    </None>
+    <None Include="FX\Tutorial02.fx">
+      <Filter>FX</Filter>
+    </None>
+    <None Include="FX\Tutorial03.fx">
+      <Filter>FX</Filter>
+    </None>
+    <None Include="FX\Tutorial04.fx">
+      <Filter>FX</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowController.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="DX11WBASE.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderProgram.h">
-      <Filter>myShaderProgram</Filter>
-    </ClInclude>
-    <ClInclude Include="MyObject.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="2DBaseObject.h">
-      <Filter>UI\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>UI\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="MyResource.h">
-      <Filter>UI\Resource\h</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture2D.h">
-      <Filter>UI\Resource\h</Filter>
-    </ClInclude>
-    <ClInclude Include="Sampler.h">
-      <Filter>UI\Resource\h</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>UI\Resource\h</Filter>
     </ClInclude>
     <ClInclude Include="phrase\FileProcessor.h">
       <Filter>pharser</Filter>
@@ -80,61 +68,73 @@
     <ClInclude Include="phrase\Chunk.h">
       <Filter>pharser</Filter>
     </ClInclude>
-    <ClInclude Include="ModelMesh.h">
-      <Filter>UI\Resource\h</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelGroup.h">
-      <Filter>UI\Resource\h</Filter>
-    </ClInclude>
     <ClInclude Include="ModelPhraser.h">
       <Filter>pharser</Filter>
     </ClInclude>
-    <ClInclude Include="shaderResources.h">
-      <Filter>myShaderProgram</Filter>
+    <ClInclude Include="winbase\WindowController.h">
+      <Filter>winbase</Filter>
     </ClInclude>
-    <ClInclude Include="BonedMesh.h">
-      <Filter>UI\Resource\h</Filter>
+    <ClInclude Include="winbase\dx11\DX11WBASE.h">
+      <Filter>winbase\dx11</Filter>
     </ClInclude>
-    <ClInclude Include="BonedMeshGroup.h">
-      <Filter>UI\Resource\h</Filter>
+    <ClInclude Include="winbase\dx11\ShaderProgram.h">
+      <Filter>winbase\dx11</Filter>
     </ClInclude>
-    <ClInclude Include="BoneGroup.h">
-      <Filter>UI\Resource\h</Filter>
+    <ClInclude Include="winbase\dx11\shaderResources.h">
+      <Filter>winbase\dx11</Filter>
     </ClInclude>
-    <ClInclude Include="Effect.h">
-      <Filter>UI</Filter>
+    <ClInclude Include="MyProgram\MyObject.h">
+      <Filter>MyProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\2d\2DBaseObject.h">
+      <Filter>MyProgram\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\2d\View.h">
+      <Filter>MyProgram\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\BonedMesh.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\BonedMeshGroup.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\BoneGroup.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\ModelGroup.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\ModelMesh.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\ModelPhraser.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\MyResource.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\Sampler.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\Texture.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\Texture2D.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\Effect.h">
+      <Filter>MyProgram\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\MyLuaManager.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\Lua_Function.h">
+      <Filter>lua</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial00.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowController.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DX11WBASE.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderProgram.cpp">
-      <Filter>myShaderProgram</Filter>
-    </ClCompile>
-    <ClCompile Include="2DBaseObject.cpp">
-      <Filter>UI\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="View.cpp">
-      <Filter>UI\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="MyResource.cpp">
-      <Filter>UI\Resource\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="Sampler.cpp">
-      <Filter>UI\Resource\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>UI\Resource\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture2D.cpp">
-      <Filter>UI\Resource\cpp</Filter>
     </ClCompile>
     <ClCompile Include="phrase\chunkprocessor.cpp">
       <Filter>pharser</Filter>
@@ -142,23 +142,53 @@
     <ClCompile Include="phrase\FileProcessor.cpp">
       <Filter>pharser</Filter>
     </ClCompile>
-    <ClCompile Include="ModelMesh.cpp">
-      <Filter>UI\Resource\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelGroup.cpp">
-      <Filter>UI\Resource\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="winmain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="BonedMesh.cpp">
-      <Filter>UI\Resource\cpp</Filter>
+    <ClCompile Include="winbase\WindowController.cpp">
+      <Filter>winbase</Filter>
     </ClCompile>
-    <ClCompile Include="BonedMeshGroup.cpp">
-      <Filter>UI\Resource\cpp</Filter>
+    <ClCompile Include="winbase\dx11\DX11WBASE.cpp">
+      <Filter>winbase\dx11</Filter>
     </ClCompile>
-    <ClCompile Include="BoneGroup.cpp">
-      <Filter>UI\Resource\cpp</Filter>
+    <ClCompile Include="winbase\dx11\ShaderProgram.cpp">
+      <Filter>winbase\dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\2d\2DBaseObject.cpp">
+      <Filter>MyProgram\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\2d\View.cpp">
+      <Filter>MyProgram\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\resources\BonedMesh.cpp">
+      <Filter>MyProgram\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\resources\BonedMeshGroup.cpp">
+      <Filter>MyProgram\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\resources\BoneGroup.cpp">
+      <Filter>MyProgram\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\resources\ModelGroup.cpp">
+      <Filter>MyProgram\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\resources\ModelMesh.cpp">
+      <Filter>MyProgram\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\resources\MyResource.cpp">
+      <Filter>MyProgram\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\resources\Sampler.cpp">
+      <Filter>MyProgram\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\resources\Texture.cpp">
+      <Filter>MyProgram\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\resources\Texture2D.cpp">
+      <Filter>MyProgram\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\MyLuaManager.cpp">
+      <Filter>lua</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,12 +1,14 @@
 
 #pragma comment(lib,"d3dcompiler.lib")
 #pragma comment(lib,"d3dx11.lib")
-#include"DX11WBASE.h"
-#include "ShaderProgram.h"
-#include "ModelGroup.h"
-#include "ModelPhraser.h"
-#include "shaderResources.h"
-#include "Sampler.h"
+#include"winbase\dx11\DX11WBASE.h"
+#include "winbase\dx11\ShaderProgram.h"
+#include "MyProgram\resources\ModelGroup.h"
+#include "MyProgram\resources\ModelPhraser.h"
+#include "winbase\dx11\shaderResources.h"
+#include "MyProgram\resources\Sampler.h"
+#include "lua\MyLuaManager.h"
+#include "lua\Lua_Function.h"
 
 struct ConstantBuffer
 {
@@ -60,16 +62,14 @@ public:
 			people->updateConstantbuffer(m_pImmediateContext,0,&cb);
 
 			people->draw(m_pImmediateContext);
+			
+			MyLuaManager::getInstance()->doFile("lua/lua_script/render.lua");
+
 			m_pSwapChain->Present(0,0);
 		}
 		
 	void intiData(){
-		people = loadPUBModel("456.BINARY",m_pd3dDevice,m_pImmediateContext);
-		shader = new ShaderProgram(m_pd3dDevice);
-		shader->setLayout(CUSTOM_LAYOUT_PU,CUSTOM_LAYOUT_PU_NUM);
-		shader->requestConstantBuffer(192);
-		shader->loadShader(L"Tutorial03.fx");
-		//shader->useLayout(m_pImmediateContext);
+		people = loadPUBModel("resources/456.BINARY",m_pd3dDevice,m_pImmediateContext);
 
 		
 		// Initialize the world matrix
@@ -89,7 +89,7 @@ public:
 		bone_shader->setLayout(CUSTOM_LAYOUT_PUB,CUSTOM_LAYOUT_PUB_NUM);
 		bone_shader->requestConstantBuffer(192,0);
 		bone_shader->requestConstantBuffer(sizeof(XMMATRIX)*BONE_MAX_NUM,1);
-		bone_shader->loadShader(L"boneAnime.fx");
+		bone_shader->loadShader(L"FX/boneAnime.fx");
 		people->useShader(bone_shader);
 
 
@@ -98,6 +98,7 @@ public:
 		samp->createSampleState(D3D11_FILTER_MIN_MAG_MIP_LINEAR,D3D11_TEXTURE_ADDRESS_WRAP,-1);
 		samp->useSamplerAt(m_pImmediateContext,0);
 
+		MyLuaManager::getInstance()->registerFun(ConsleGlue);
 
 		setDrawMode(Triangle);
 	}

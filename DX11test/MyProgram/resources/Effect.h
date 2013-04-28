@@ -1,5 +1,5 @@
 #pragma once
-#include"MyObject.h"
+#include"..\MyObject.h"
 #include <vector>
 namespace myprogram{
 	class effectBase:public myprogram::MyObject{

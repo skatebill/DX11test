@@ -1,6 +1,6 @@
 #pragma once
 #include "MyResource.h"
-#include "phrase\Chunk.h"
+#include "..\..\phrase\Chunk.h"
 #include <vector>
 #include <map>
 class bone{
