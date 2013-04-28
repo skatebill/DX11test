@@ -6,6 +6,8 @@ typedef enum DrawMode{
 	Triangle,
 	Line
 }DrawMode;
+static ID3D11ShaderResourceView* pSRV[] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
+
 class DX11WBASE :
 	public WindowController
 {
@@ -28,7 +30,12 @@ public:
 	HRESULT initDevice();
 	void CleanupDevice();
 	void setDrawMode(DrawMode model);
+	void presentDraw(){m_pSwapChain->Present(0,0);clearResources();}
 
+	void clearTargetColor(ID3D11RenderTargetView* dstView,float* color){m_pImmediateContext->ClearRenderTargetView(dstView,color);}
+	void clearTargetDepth(ID3D11DepthStencilView* dstView,float clearnum){m_pImmediateContext->ClearDepthStencilView(dstView,D3D11_CLEAR_DEPTH,clearnum,0);}
+	void clearTargetStencil(ID3D11DepthStencilView* dstView,UINT8 clearnum){m_pImmediateContext->ClearDepthStencilView(dstView,D3D11_CLEAR_STENCIL,0,clearnum);}
+	void clearResources(){m_pImmediateContext->PSSetShaderResources( 0, _countof(pSRV), pSRV );}
 	
 	virtual void render(float delta)=0;
 	virtual void intiData()=0;

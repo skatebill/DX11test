@@ -1,6 +1,6 @@
 #pragma once
-
 #include "MyLuaManager.h"
+#ifdef USE_LUA
 #include "..\winbase\dx11\DX11WBASE.h"
 
 
@@ -12,3 +12,4 @@ extern "C" int _Version(lua_State* L) {
 	return 0;
 }
 luaL_Reg ConsleGlue[] = { { "Version", _Version }, { 0, 0 } };
+#endif

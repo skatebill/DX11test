@@ -1,5 +1,5 @@
 #include "MyLuaManager.h"
-
+#ifdef USE_LUA
 MyLuaManager* MyLuaManager::s_Instance=0;
 
 void MyLuaManager::doFile(const char* file)
@@ -23,3 +23,4 @@ void MyLuaManager::doString(const char* command){
 void MyLuaManager::registerFun(luaL_Reg* config){
 	lua_register(m_L, config->name, config->func);
 }
+#endif

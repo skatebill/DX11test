@@ -73,10 +73,10 @@ bool ModelMesh::loadTexture(char* texName,ID3D11DeviceContext* context){
 
 ModelMesh* getQuadModel(ID3D11Device* device,int w,int h){
 	VertexPU vertex[]={
-		{XMFLOAT3(0,0,0),XMFLOAT2(0,1)},
-		{XMFLOAT3(w,0,0),XMFLOAT2(1,1)},
-		{XMFLOAT3(w,-h,0),XMFLOAT2(1,0)},
-		{XMFLOAT3(0,-h,0),XMFLOAT2(0,0)}};
+		{XMFLOAT3(0,0,0),XMFLOAT2(0,0)},
+		{XMFLOAT3(w,0,0),XMFLOAT2(1,0)},
+		{XMFLOAT3(w,-h,0),XMFLOAT2(1,1)},
+		{XMFLOAT3(0,-h,0),XMFLOAT2(0,1)}};
 	WORD	index[]={0,1,3,1,2,3};
 	ModelMesh* result=new ModelMesh(device);
 	result->setVertexSource(vertex,sizeof(VertexPU),4);

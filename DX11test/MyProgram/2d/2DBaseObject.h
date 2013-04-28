@@ -14,6 +14,7 @@ namespace myprogram{
 		float _w,_h;
 	public:
 		static ViewProMatrix s_Matrix;
+		static ViewProMatrix s_AntiMatrix;
 
 		_2DBaseObject():effectedObject(){}
 		virtual ~_2DBaseObject(){}

@@ -131,6 +131,9 @@
     <ClInclude Include="lua\Lua_Function.h">
       <Filter>lua</Filter>
     </ClInclude>
+    <ClInclude Include="winbase\dx11\RenderTarget.h">
+      <Filter>winbase\dx11</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial00.cpp">
@@ -189,6 +192,9 @@
     </ClCompile>
     <ClCompile Include="lua\MyLuaManager.cpp">
       <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="winbase\dx11\RenderTarget.cpp">
+      <Filter>winbase\dx11</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

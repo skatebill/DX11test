@@ -18,7 +18,7 @@ void BonedMeshGroup::addBonedMesh(BonedMesh* m){
 void BonedMeshGroup::draw(ID3D11DeviceContext* context){
 	ModelGroup::draw(context);
 	int i=0;
-//	m_CurFrame+=0.1333f;
+	m_CurFrame+=0.1333f;
 	if(m_CurFrame>578)
 	{
 		m_CurFrame=0;

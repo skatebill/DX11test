@@ -37,10 +37,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\Microsoft DirectX SDK (June 2010)\Include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Microsoft DirectX SDK (June 2010)\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ReferencePath>E:\Microsoft DirectX SDK (June 2010)\Lib\x86;$(ReferencePath)</ReferencePath>
+    <ReferencePath>D:\Microsoft DirectX SDK (June 2010)\Lib\x86;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>E:\Microsoft DirectX SDK (June 2010)\Include;$(IncludePath)</IncludePath>
@@ -54,7 +54,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>lua5.1.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -99,6 +99,7 @@
     <ClInclude Include="phrase\FileProcessor.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="winbase\dx11\DX11WBASE.h" />
+    <ClInclude Include="winbase\dx11\RenderTarget.h" />
     <ClInclude Include="winbase\dx11\ShaderProgram.h" />
     <ClInclude Include="winbase\dx11\shaderResources.h" />
     <ClInclude Include="winbase\WindowController.h" />
@@ -120,6 +121,7 @@
     <ClCompile Include="phrase\FileProcessor.cpp" />
     <ClCompile Include="Tutorial00.cpp" />
     <ClCompile Include="winbase\dx11\DX11WBASE.cpp" />
+    <ClCompile Include="winbase\dx11\RenderTarget.cpp" />
     <ClCompile Include="winbase\dx11\ShaderProgram.cpp" />
     <ClCompile Include="winbase\WindowController.cpp" />
     <ClCompile Include="winmain.cpp" />

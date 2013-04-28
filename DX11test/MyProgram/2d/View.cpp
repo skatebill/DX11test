@@ -3,7 +3,7 @@
 
 View::View(ID3D11Device* device)
 {
-	m_QuadModel=getQuadModel(device,100,500);
+	m_QuadModel=getQuadModel(device,400,300);
 }
 
 
