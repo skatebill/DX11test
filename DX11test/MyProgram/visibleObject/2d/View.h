@@ -1,5 +1,6 @@
 #pragma once
 #include "2DBaseObject.h"
+#include"..\..\MatrixStack.h"
 using namespace myprogram;
 
 class View :
@@ -12,8 +13,8 @@ public:
 	View(ID3D11Device*);
 	virtual ~View(void);
 
-	void draw(ID3D11DeviceContext* context);
-	void release(){m_QuadModel->release();m_QuadModel=0;};
+	void draw(ID3D11DeviceContext* context,MatrixStack* stack);
+	void Release(){m_QuadModel->Release();m_QuadModel=0;};
 	bool isReleased(){return m_QuadModel==0;}
 
 };

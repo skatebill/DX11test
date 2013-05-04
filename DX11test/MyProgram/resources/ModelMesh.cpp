@@ -9,10 +9,10 @@ ModelMesh::ModelMesh(ID3D11Device* device):MyResource(),m_VertexBuffer(0),m_Inde
 
 ModelMesh::~ModelMesh(void)
 {
-	release();
+	Release();
 }
 
-void ModelMesh::release()
+void ModelMesh::Release()
 {
 	RELEASE(m_VertexBuffer);
 	RELEASE(m_IndexBuffer);
@@ -62,7 +62,7 @@ bool ModelMesh::setIndexSource(void* data,int indexNum)
 bool ModelMesh::loadTexture(char* texName,ID3D11DeviceContext* context){
 	if(m_Texture)
 	{
-		m_Texture->release();
+		m_Texture->Release();
 	}
 	m_Texture=new Texture2D(m_Device);
 	m_DefualtSlot = 0;

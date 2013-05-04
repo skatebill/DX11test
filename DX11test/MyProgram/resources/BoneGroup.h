@@ -45,7 +45,7 @@ public:
 		return boneList[boneId]->getBoneSample(framePos);
 
 	}
-	void release(){
+	void Release(){
 		for(map<int,bone*>::iterator ite=boneList.begin();ite!=boneList.end();ite++)
 		{
 			delete ite->second;

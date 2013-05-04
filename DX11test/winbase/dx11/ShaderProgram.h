@@ -4,6 +4,7 @@
 #include <d3dcompiler.h>
 #include <map>
 #pragma comment(lib,"d3dcompiler.lib")
+#define RELEASE(x) if(x){x->Release();x=0;}
 
 class ShaderProgram
 {
@@ -56,5 +57,11 @@ public:
 
 	virtual HRESULT loadShader(WCHAR* fileName);
 	virtual void setLayout(D3D11_INPUT_ELEMENT_DESC* layout,int num){m_layout=layout;m_numElemnts=num;}
+
+	void Release(){
+		RELEASE(m_pVertexShader);
+		RELEASE(m_pPixelShader);
+		RELEASE(m_pVertexLayout);
+	}
 };
 

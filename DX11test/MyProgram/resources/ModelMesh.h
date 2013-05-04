@@ -38,7 +38,7 @@ public:
 	ModelMesh(ID3D11Device*);
 	virtual ~ModelMesh(void);
 
-	void release();
+	void Release();
 	bool isReleased();
 
 	bool setVertexSource(void*,int stride,int numvertex);

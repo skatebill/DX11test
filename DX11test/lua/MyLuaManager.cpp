@@ -17,10 +17,16 @@ void MyLuaManager::doString(const char* command){
 		std::cout<<lua_tostring(m_L,-1)<<std::endl;
 		lua_pop(m_L,1);
 	}
+	
 
 }
-
 void MyLuaManager::registerFun(luaL_Reg* config){
 	lua_register(m_L, config->name, config->func);
+}
+void MyLuaManager::registerFun(char* funname,lua_CFunction fun){
+	lua_register(m_L, funname, fun);
+}
+void MyLuaManager::registerLib(char* libName,luaL_Reg* reg){
+	luaL_register(m_L,libName,reg);
 }
 #endif

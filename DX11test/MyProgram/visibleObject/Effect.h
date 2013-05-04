@@ -1,18 +1,16 @@
 #pragma once
-#include"..\MyObject.h"
+#include"visibleObject.h"
 #include <vector>
 namespace myprogram{
 	class effectBase:public myprogram::MyObject{
-	private:
-		int m_Type;
 	public:
-		effectBase():m_Type(0){}
+		effectBase(){}
 		virtual ~effectBase(){}
 		virtual void update(float)=0;
 		virtual void use()=0;
 	};
 
-	class effectedObject:public myprogram::MyObject{
+	class effectedObject:public myprogram::VisibleObject{
 	protected:
 		std::vector<effectBase*> m_effectList;
 	public:

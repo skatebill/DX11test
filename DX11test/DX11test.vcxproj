@@ -43,14 +43,14 @@
     <ReferencePath>$(DXSDK_DIR)\Lib\x86;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>E:\Microsoft DirectX SDK (June 2010)\Include;$(IncludePath)</IncludePath>
-    <ReferencePath>E:\Microsoft DirectX SDK (June 2010)\Lib\x86;$(ReferencePath)</ReferencePath>
+    <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <ReferencePath>$(DXSDK_DIR)\Lib\x86;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -75,16 +75,17 @@
     <None Include="FX\Tutorial02.fx" />
     <None Include="FX\Tutorial03.fx" />
     <None Include="FX\Tutorial04.fx" />
+    <None Include="lua\lua_script\intiLua.lua" />
     <None Include="Tutorial00.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua\Lua_Function.h" />
     <ClInclude Include="lua\MyLuaManager.h" />
     <ClInclude Include="ModelPhraser.h" />
-    <ClInclude Include="MyProgram\2d\2DBaseObject.h" />
-    <ClInclude Include="MyProgram\2d\View.h" />
-    <ClInclude Include="MyProgram\Effect.h" />
+    <ClInclude Include="MyProgram\luaInterface\luaInterface.h" />
+    <ClInclude Include="MyProgram\MatrixStack.h" />
     <ClInclude Include="MyProgram\MyObject.h" />
+    <ClInclude Include="MyProgram\ObjectConrtoller.h" />
     <ClInclude Include="MyProgram\resources\BonedMesh.h" />
     <ClInclude Include="MyProgram\resources\BonedMeshGroup.h" />
     <ClInclude Include="MyProgram\resources\BoneGroup.h" />
@@ -92,9 +93,16 @@
     <ClInclude Include="MyProgram\resources\ModelMesh.h" />
     <ClInclude Include="MyProgram\resources\ModelPhraser.h" />
     <ClInclude Include="MyProgram\resources\MyResource.h" />
+    <ClInclude Include="MyProgram\resources\RenderAble.h" />
     <ClInclude Include="MyProgram\resources\Sampler.h" />
+    <ClInclude Include="MyProgram\resources\TextuedRenderAble.h" />
     <ClInclude Include="MyProgram\resources\Texture.h" />
     <ClInclude Include="MyProgram\resources\Texture2D.h" />
+    <ClInclude Include="MyProgram\visibleObject\2d\2DBaseObject.h" />
+    <ClInclude Include="MyProgram\visibleObject\2d\ImageView.h" />
+    <ClInclude Include="MyProgram\visibleObject\2d\View.h" />
+    <ClInclude Include="MyProgram\visibleObject\Effect.h" />
+    <ClInclude Include="MyProgram\visibleObject\visibleObject.h" />
     <ClInclude Include="phrase\Chunk.h" />
     <ClInclude Include="phrase\FileProcessor.h" />
     <ClInclude Include="Resource.h" />
@@ -106,17 +114,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lua\MyLuaManager.cpp" />
-    <ClCompile Include="MyProgram\2d\2DBaseObject.cpp" />
-    <ClCompile Include="MyProgram\2d\View.cpp" />
+    <ClCompile Include="MyProgram\luaInterface\luaInterface.cpp" />
+    <ClCompile Include="MyProgram\MatrixStack.cpp" />
+    <ClCompile Include="MyProgram\ObjectConrtoller.cpp" />
     <ClCompile Include="MyProgram\resources\BonedMesh.cpp" />
     <ClCompile Include="MyProgram\resources\BonedMeshGroup.cpp" />
     <ClCompile Include="MyProgram\resources\BoneGroup.cpp" />
     <ClCompile Include="MyProgram\resources\ModelGroup.cpp" />
     <ClCompile Include="MyProgram\resources\ModelMesh.cpp" />
     <ClCompile Include="MyProgram\resources\MyResource.cpp" />
+    <ClCompile Include="MyProgram\resources\RenderAble.cpp" />
     <ClCompile Include="MyProgram\resources\Sampler.cpp" />
     <ClCompile Include="MyProgram\resources\Texture.cpp" />
     <ClCompile Include="MyProgram\resources\Texture2D.cpp" />
+    <ClCompile Include="MyProgram\visibleObject\2d\2DBaseObject.cpp" />
+    <ClCompile Include="MyProgram\visibleObject\2d\ImageView.cpp" />
+    <ClCompile Include="MyProgram\visibleObject\2d\View.cpp" />
+    <ClCompile Include="MyProgram\visibleObject\visibleObject.cpp" />
     <ClCompile Include="phrase\chunkprocessor.cpp" />
     <ClCompile Include="phrase\FileProcessor.cpp" />
     <ClCompile Include="Tutorial00.cpp" />
@@ -125,6 +139,7 @@
     <ClCompile Include="winbase\dx11\ShaderProgram.cpp" />
     <ClCompile Include="winbase\WindowController.cpp" />
     <ClCompile Include="winmain.cpp" />
+    <ClCompile Include="winmain2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,13 +9,13 @@ ModelGroup::ModelGroup(ID3D11Device* device):m_Device(0),m_Shader(0)
 
 ModelGroup::~ModelGroup(void)
 {
-	release();
+	Release();
 }
 
-void ModelGroup::release(){
+void ModelGroup::Release(){
 	for(std::vector<ModelMesh*>::iterator ite=m_MeshList.begin();ite!=m_MeshList.end();ite++)
 	{
-		(**ite).release();
+		(**ite).Release();
 	}
 	m_MeshList.clear();
 }

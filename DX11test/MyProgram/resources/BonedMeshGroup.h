@@ -13,7 +13,7 @@ public:
 	BonedMeshGroup(ID3D11Device*);
 	~BonedMeshGroup(void);
 
-	virtual void release(){}
+	virtual void Release(){}
 	virtual bool isReleased(){return false;}
 
 	void addBonedMesh(BonedMesh* m);

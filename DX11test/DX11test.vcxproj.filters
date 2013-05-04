@@ -28,9 +28,6 @@
     <Filter Include="MyProgram">
       <UniqueIdentifier>{3be36d8e-246d-4463-ab38-36b1008d89c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MyProgram\2d">
-      <UniqueIdentifier>{4c29b262-0b11-4bee-be11-65624ac5ca7d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MyProgram\resources">
       <UniqueIdentifier>{fd38480b-6892-4f84-8fac-f1fecc8183ce}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,21 @@
     </Filter>
     <Filter Include="FX">
       <UniqueIdentifier>{6c55466a-6a9e-40f3-a30b-961bfe86dab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\visibleObject">
+      <UniqueIdentifier>{62f8a889-5027-4238-83b4-8732d0579343}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\visibleObject\2d">
+      <UniqueIdentifier>{be27ceb5-ca1c-4e7f-8bd0-0a68ae4ba19e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\visibleObject\3d">
+      <UniqueIdentifier>{39ce9f38-967e-4253-824c-d72968d995ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\luainterface">
+      <UniqueIdentifier>{e9da4bd0-cf00-497e-9c16-e76b63fdeac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyProgram\resources\renderable">
+      <UniqueIdentifier>{7b43ad4e-ef71-4c47-aa37-8adb7fe8313d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +68,9 @@
     </None>
     <None Include="FX\Tutorial04.fx">
       <Filter>FX</Filter>
+    </None>
+    <None Include="lua\lua_script\intiLua.lua">
+      <Filter>lua</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -85,12 +100,6 @@
     </ClInclude>
     <ClInclude Include="MyProgram\MyObject.h">
       <Filter>MyProgram</Filter>
-    </ClInclude>
-    <ClInclude Include="MyProgram\2d\2DBaseObject.h">
-      <Filter>MyProgram\2d</Filter>
-    </ClInclude>
-    <ClInclude Include="MyProgram\2d\View.h">
-      <Filter>MyProgram\2d</Filter>
     </ClInclude>
     <ClInclude Include="MyProgram\resources\BonedMesh.h">
       <Filter>MyProgram\resources</Filter>
@@ -122,9 +131,6 @@
     <ClInclude Include="MyProgram\resources\Texture2D.h">
       <Filter>MyProgram\resources</Filter>
     </ClInclude>
-    <ClInclude Include="MyProgram\Effect.h">
-      <Filter>MyProgram\resources</Filter>
-    </ClInclude>
     <ClInclude Include="lua\MyLuaManager.h">
       <Filter>lua</Filter>
     </ClInclude>
@@ -133,6 +139,36 @@
     </ClInclude>
     <ClInclude Include="winbase\dx11\RenderTarget.h">
       <Filter>winbase\dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\visibleObject\visibleObject.h">
+      <Filter>MyProgram\visibleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\ObjectConrtoller.h">
+      <Filter>MyProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\visibleObject\2d\View.h">
+      <Filter>MyProgram\visibleObject\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\visibleObject\2d\2DBaseObject.h">
+      <Filter>MyProgram\visibleObject\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\visibleObject\Effect.h">
+      <Filter>MyProgram\visibleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\luaInterface\luaInterface.h">
+      <Filter>MyProgram\luainterface</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\RenderAble.h">
+      <Filter>MyProgram\resources\renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\resources\TextuedRenderAble.h">
+      <Filter>MyProgram\resources\renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\MatrixStack.h">
+      <Filter>MyProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="MyProgram\visibleObject\2d\ImageView.h">
+      <Filter>MyProgram\visibleObject\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -156,12 +192,6 @@
     </ClCompile>
     <ClCompile Include="winbase\dx11\ShaderProgram.cpp">
       <Filter>winbase\dx11</Filter>
-    </ClCompile>
-    <ClCompile Include="MyProgram\2d\2DBaseObject.cpp">
-      <Filter>MyProgram\2d</Filter>
-    </ClCompile>
-    <ClCompile Include="MyProgram\2d\View.cpp">
-      <Filter>MyProgram\2d</Filter>
     </ClCompile>
     <ClCompile Include="MyProgram\resources\BonedMesh.cpp">
       <Filter>MyProgram\resources</Filter>
@@ -195,6 +225,33 @@
     </ClCompile>
     <ClCompile Include="winbase\dx11\RenderTarget.cpp">
       <Filter>winbase\dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\visibleObject\visibleObject.cpp">
+      <Filter>MyProgram\visibleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\ObjectConrtoller.cpp">
+      <Filter>MyProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\visibleObject\2d\View.cpp">
+      <Filter>MyProgram\visibleObject\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\visibleObject\2d\2DBaseObject.cpp">
+      <Filter>MyProgram\visibleObject\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\luaInterface\luaInterface.cpp">
+      <Filter>MyProgram\luainterface</Filter>
+    </ClCompile>
+    <ClCompile Include="winmain2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\resources\RenderAble.cpp">
+      <Filter>MyProgram\resources\renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\MatrixStack.cpp">
+      <Filter>MyProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="MyProgram\visibleObject\2d\ImageView.cpp">
+      <Filter>MyProgram\visibleObject\2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

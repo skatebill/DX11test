@@ -1,7 +1,7 @@
 #include "Texture2D.h"
 
 
-Texture2D::Texture2D(ID3D11Device *device):m_RecourceView(0),Texture()
+Texture2D::Texture2D(ID3D11Device *device):m_RecourceView(0),Texture(),m_SelfGenerateFlag(false)
 {
 	m_pd3dDevice=device;
 }
@@ -50,6 +50,7 @@ bool Texture2D::loadFromFile(LPWCH filename,ID3D11DeviceContext* context){
     D3D11_TEXTURE2D_DESC texdesc; 
     tex->GetDesc(&texdesc);
 #endif
+	m_SelfGenerateFlag=true;
     return true; 
 }
 
@@ -64,8 +65,8 @@ bool Texture2D::loadFromFile(char* filename,ID3D11DeviceContext* context){
 ID3D11ShaderResourceView* Texture2D::getTexture(){
 	return m_RecourceView;
 }
-void Texture2D::release(){
-	if(m_RecourceView)
+void Texture2D::Release(){
+	if(m_RecourceView&&m_SelfGenerateFlag)
 		m_RecourceView->Release();
 	m_RecourceView = 0;
 

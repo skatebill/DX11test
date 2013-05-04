@@ -1,10 +1,10 @@
 #pragma once
-#define USE_LUA_NO
+#define USE_LUA
 #ifdef USE_LUA
 #include<lua.hpp>
 #include<iostream>
 #include<string>
-#pragma comment(lib,"lua5.1.lib.lib")
+#pragma comment(lib,"lua5.1.lib")
 class MyLuaManager
 {
 private:
@@ -18,5 +18,7 @@ public:
 	void doString(const char*);
 	void doFile(const char*);
 	void registerFun(luaL_Reg*);
+	void registerFun(char* funname,lua_CFunction fun);
+	void registerLib(char* libName,luaL_Reg*);
 };
 #endif

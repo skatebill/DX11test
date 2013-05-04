@@ -16,7 +16,7 @@ public:
 	ModelGroup(ID3D11Device* device);
 	~ModelGroup(void);
 
-	virtual void release();
+	virtual void Release();
 	virtual bool isReleased();
 
 	void addMesh(ModelMesh*);

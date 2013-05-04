@@ -9,14 +9,14 @@ Sampler::Sampler(ID3D11Device* device):m_pSampler(0),MyResource()
 
 Sampler::~Sampler(void)
 {
-	release();
+	Release();
 }
 
 
 ID3D11SamplerState* Sampler::getSampleState(){
 	return m_pSampler;
 }
-void Sampler::release(){
+void Sampler::Release(){
 	if(m_pSampler)
 		m_pSampler->Release();
 	m_pSampler=0;
