@@ -13,6 +13,10 @@ public:
 		if(m_Image)
 			m_Image->setTexture(tex);
 	}
+	void setTexture(ID3D11ShaderResourceView* tex){
+		if(m_Image)
+			m_Image->setTexture(tex);
+	}
 	void loadTexture(char* textureName,ID3D11DeviceContext* context){
 		if(m_Image)
 		{

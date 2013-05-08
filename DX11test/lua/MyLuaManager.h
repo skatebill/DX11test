@@ -1,5 +1,5 @@
 #pragma once
-#define USE_LUA
+#define USE_LUA_NO
 #ifdef USE_LUA
 #include<lua.hpp>
 #include<iostream>

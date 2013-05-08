@@ -12,6 +12,13 @@ public:
 	virtual ~TexturedRenderable(){}
 
 	void setTexture(Texture2D* tex){m_Tex=tex;}
+	void setTexture(ID3D11ShaderResourceView* tex){
+		if(!m_Tex)
+		{
+			m_Tex=new Texture2D(m_Device);
+		}
+		m_Tex->setFromShaderResourceView(tex);
+	}
 	void loadTexture(char* textureName,ID3D11DeviceContext* context){
 		if(!m_Tex)
 		{
